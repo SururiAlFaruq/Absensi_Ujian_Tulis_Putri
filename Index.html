@@ -1,0 +1,1836 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Absensi Ujian Putri - Madin Ar Rohman Tegalrejo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --indigo-deep: #0B1E3B;
+      --emerald-royal: #064E3B;
+      --teal-rich: #0F766E;
+      --gold: #F59E0B;
+      --gold-bright: #FCD34D;
+      --gold-soft: #FEF3C7;
+      --white: #FFFFFF;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --success: #059669;
+      --success-bg: #D1FAE5;
+      --danger: #E11D48;
+      --danger-bg: #FFE4E6;
+      --border: #E2E8F0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: linear-gradient(180deg, #E6F0F7 0%, #F4F7FA 40%, #EEF2F6 100%);
+      color: var(--text-main);
+      padding-bottom: 100px;
+      min-height: 100vh;
+    }
+
+    /* ================= BANNER 3 LOGO LEMBAGA ================= */
+    .logo-trilogy-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1.5px solid rgba(252, 211, 77, 0.75);
+      border-radius: 16px;
+      padding: 8px 14px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+    }
+
+    .logo-trilogy-bar.lock-logos {
+      width: 100%;
+      max-width: 340px;
+      margin-bottom: 14px;
+      padding: 8px 12px;
+    }
+
+    .logo-trilogy-bar.header-logos {
+      margin-bottom: 12px;
+    }
+
+    .logo-item {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 44px;
+    }
+
+    .logo-item img {
+      max-height: 42px;
+      max-width: 100%;
+      width: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    .logo-divider {
+      width: 1px;
+      height: 30px;
+      background: #CBD5E1;
+      flex-shrink: 0;
+    }
+
+    /* ================= PIN LOCK SCREEN ================= */
+    .lock-screen {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at top right, #065F46 0%, #0B1E3B 55%, #071326 100%);
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: var(--white);
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+      overflow-y: auto;
+    }
+
+    .lock-screen.unlocked {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .lock-illustration {
+      width: 105px;
+      height: 92px;
+      margin-bottom: 8px;
+      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.35));
+    }
+
+    .lock-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--gold-bright);
+      letter-spacing: -0.3px;
+      text-align: center;
+    }
+
+    .lock-subtitle {
+      font-size: 12px;
+      color: #CBD5E1;
+      margin-top: 3px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .pin-dots {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .pin-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid var(--gold-bright);
+      background: transparent;
+      transition: all 0.2s ease;
+    }
+
+    .pin-dot.filled {
+      background: var(--gold-bright);
+      box-shadow: 0 0 12px rgba(252, 211, 77, 0.8);
+      transform: scale(1.15);
+    }
+
+    .pin-dot.error {
+      border-color: #FB7185;
+      background: #FB7185;
+      animation: shake 0.35s ease;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      75% { transform: translateX(6px); }
+    }
+
+    .numpad-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 66px);
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .num-btn {
+      width: 66px;
+      height: 66px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(252, 211, 77, 0.3);
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(8px);
+      color: var(--white);
+      font-size: 22px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.1s, background 0.15s;
+    }
+
+    .num-btn:active {
+      transform: scale(0.92);
+      background: rgba(252, 211, 77, 0.28);
+    }
+
+    .num-btn.action-btn {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gold-bright);
+      border-color: transparent;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    /* ================= HEADER & ILUSTRASI SANTRI ================= */
+    .exam-header {
+      background: linear-gradient(135deg, #0B1E3B 0%, #0F3D5E 52%, #065F46 100%);
+      color: var(--white);
+      padding: 18px 18px 26px;
+      border-bottom-left-radius: 28px;
+      border-bottom-right-radius: 28px;
+      box-shadow: 0 12px 28px rgba(6, 78, 59, 0.22);
+      border-bottom: 3px solid var(--gold);
+    }
+
+    .header-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .exam-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(90deg, rgba(245, 158, 11, 0.25), rgba(252, 211, 77, 0.12));
+      border: 1px solid rgba(252, 211, 77, 0.5);
+      color: var(--gold-soft);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 99px;
+    }
+
+    .btn-lock-app {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--gold-soft);
+      padding: 5px 10px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .mahfudzot-hero {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
+      border: 1px solid rgba(252, 211, 77, 0.35);
+      border-radius: 18px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .hero-santri-svg {
+      width: 74px;
+      height: 70px;
+      flex-shrink: 0;
+    }
+
+    .hero-quote-wrap {
+      flex: 1;
+      text-align: right;
+    }
+
+    .arabic-quote {
+      font-family: 'Amiri', serif;
+      font-size: 23px;
+      font-weight: 700;
+      color: var(--gold-bright);
+      line-height: 1.6;
+      direction: rtl;
+      margin-bottom: 2px;
+    }
+
+    .quote-meaning {
+      font-size: 11px;
+      color: #E2E8F0;
+      font-style: italic;
+      text-align: left;
+      line-height: 1.35;
+    }
+
+    .header-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-title-row h1 {
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      line-height: 1.25;
+    }
+
+    .header-sub {
+      font-size: 11.5px;
+      color: var(--gold-soft);
+      margin-top: 2px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .btn-add-santri-top {
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(252, 211, 77, 0.5);
+      color: var(--gold-bright);
+      padding: 8px 10px;
+      border-radius: 11px;
+      font-size: 11.5px;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-refresh {
+      background: linear-gradient(135deg, var(--gold), #D97706);
+      border: none;
+      color: #0B1E3B;
+      padding: 8px 11px;
+      border-radius: 11px;
+      font-size: 11.5px;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
+    }
+
+    /* ================= MAIN CONTAINER & CARDS ================= */
+    .container {
+      max-width: 540px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 16px;
+      margin-bottom: 14px;
+      border: 1px solid rgba(203, 213, 225, 0.75);
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3.5px;
+      background: linear-gradient(90deg, #0B1E3B, #0F766E, #F59E0B);
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #0F3D5E;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .live-sync-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: none;
+      letter-spacing: 0;
+      color: #047857;
+      background: #ECFDF5;
+      border: 1px solid #A7F3D0;
+      padding: 2px 8px;
+      border-radius: 99px;
+    }
+
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #10B981;
+      animation: pulseDot 1.8s infinite;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    select, input[type="text"] {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1.5px solid #CBD5E1;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text-main);
+      background-color: #F8FAFC;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    select:focus, input[type="text"]:focus {
+      border-color: #0F766E;
+      background-color: var(--white);
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
+    }
+
+    .add-santri-panel {
+      display: none;
+      background: linear-gradient(145deg, #FFFBEB, #FEF3C7);
+      border: 1.5px solid #F59E0B;
+      border-radius: 18px;
+      padding: 15px;
+      margin-bottom: 14px;
+      box-shadow: 0 8px 20px rgba(245, 158, 11, 0.15);
+    }
+
+    .add-santri-panel.open {
+      display: block;
+    }
+
+    .session-banner {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .session-pill {
+      flex: 1;
+      min-width: 140px;
+      background: linear-gradient(135deg, #0B1E3B, #0F3D5E);
+      color: var(--gold-bright);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 10px;
+      text-align: center;
+      border: 1px solid rgba(252, 211, 77, 0.4);
+    }
+
+    .mapel-grid {
+      margin-top: 8px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+
+    .mapel-chip {
+      background: linear-gradient(135deg, #F0FDFA, #EFF6FF);
+      border: 1px solid #BAE6FD;
+      border-radius: 10px;
+      padding: 7px 9px;
+      font-size: 11px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .mapel-chip strong {
+      color: #0B1E3B;
+      font-weight: 800;
+      border-bottom: 1px dashed #BAE6FD;
+      padding-bottom: 2px;
+    }
+
+    .mapel-sesi-row {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      color: #0F766E;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .sesi-tag {
+      font-size: 10px;
+      font-weight: 800;
+      color: #0369A1;
+    }
+
+    .room-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .room-status-card {
+      border: 1.5px solid #E2E8F0;
+      border-radius: 15px;
+      padding: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: linear-gradient(145deg, #FFFFFF, #F8FAFC);
+    }
+
+    .room-status-card.done {
+      background: linear-gradient(145deg, #ECFDF5, #D1FAE5);
+      border-color: #10B981;
+    }
+
+    .room-status-card.active-edit {
+      box-shadow: 0 0 0 2.5px var(--gold);
+      transform: translateY(-1px);
+    }
+
+    .room-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .room-name {
+      font-weight: 800;
+      font-size: 14px;
+      color: var(--indigo-deep);
+    }
+
+    .badge-status {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 99px;
+    }
+
+    .badge-pending {
+      background: #FEF3C7;
+      color: #B45309;
+    }
+
+    .badge-done {
+      background: #059669;
+      color: #FFFFFF;
+    }
+
+    .room-detail-text {
+      font-size: 11.5px;
+      color: #475569;
+      line-height: 1.4;
+    }
+
+    .room-kondisi-mini {
+      display: block;
+      margin-top: 3px;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #0F3D5E;
+    }
+
+    .edit-hint-tag {
+      display: inline-block;
+      margin-top: 5px;
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #047857;
+      background: rgba(255, 255, 255, 0.75);
+      padding: 2px 8px;
+      border-radius: 6px;
+      border: 1px solid #6EE7B7;
+    }
+
+    .room-tabs {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 5px;
+      margin-bottom: 14px;
+    }
+
+    .room-tab-btn {
+      padding: 10px 2px;
+      border-radius: 12px;
+      border: 1.5px solid #CBD5E1;
+      background: #F8FAFC;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .room-tab-btn.active {
+      background: linear-gradient(135deg, #0B1E3B, #065F46);
+      color: var(--gold-bright);
+      border-color: #0B1E3B;
+      box-shadow: 0 4px 10px rgba(11, 30, 59, 0.2);
+    }
+
+    .edit-mode-banner {
+      display: none;
+      background: #FEF3C7;
+      border: 1px solid #F59E0B;
+      color: #92400E;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 12px;
+      border-radius: 10px;
+      margin-bottom: 12px;
+    }
+
+    .edit-mode-banner.visible {
+      display: block;
+    }
+
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 12px 0;
+      text-align: center;
+    }
+
+    .stat-box {
+      padding: 10px 6px;
+      border-radius: 13px;
+      background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
+      border: 1px solid #BFDBFE;
+    }
+
+    .stat-box.hadir {
+      background: linear-gradient(135deg, #ECFDF5, #D1FAE5);
+      border-color: #A7F3D0;
+    }
+
+    .stat-box.absen {
+      background: linear-gradient(135deg, #FFF1F2, #FFE4E6);
+      border-color: #FECDD3;
+    }
+
+    .stat-box .num {
+      font-size: 19px;
+      font-weight: 800;
+      color: #1E3A8A;
+    }
+
+    .stat-box.hadir .num { color: #047857; }
+    .stat-box.absen .num { color: #BE123C; }
+
+    .stat-box .lbl {
+      font-size: 11px;
+      color: #475569;
+      font-weight: 700;
+    }
+
+    .absent-adder {
+      background: linear-gradient(145deg, #F8FAFC, #F1F5F9);
+      border: 1.5px dashed #94A3B8;
+      border-radius: 15px;
+      padding: 12px;
+      margin-top: 10px;
+    }
+
+    .kondisi-box {
+      background: linear-gradient(145deg, #F0F9FF, #E0F2FE);
+      border: 1.5px solid #7DD3FC;
+      border-radius: 15px;
+      padding: 12px;
+      margin-top: 12px;
+    }
+
+    .form-group {
+      margin-bottom: 10px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 5px;
+    }
+
+    .btn-add-absent {
+      width: 100%;
+      padding: 11px;
+      border-radius: 11px;
+      border: none;
+      background: linear-gradient(135deg, #0F766E, #0D9488);
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(15, 118, 110, 0.25);
+    }
+
+    .absent-list {
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .absent-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(135deg, #FFF1F2, #FFE4E6);
+      border: 1px solid #FDA4AF;
+      padding: 10px 12px;
+      border-radius: 12px;
+    }
+
+    .absent-info strong {
+      font-size: 13.5px;
+      color: #881337;
+      display: block;
+    }
+
+    .absent-info span {
+      font-size: 12px;
+      color: #9F1239;
+      font-weight: 600;
+    }
+
+    .btn-remove {
+      background: var(--white);
+      border: 1px solid #FDA4AF;
+      color: var(--danger);
+      border-radius: 8px;
+      padding: 5px 9px;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .empty-nihil {
+      text-align: center;
+      padding: 13px;
+      font-size: 12.5px;
+      color: #065F46;
+      background: linear-gradient(135deg, #ECFDF5, #D1FAE5);
+      border: 1px solid #A7F3D0;
+      border-radius: 12px;
+      font-weight: 700;
+      margin-top: 10px;
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 14px;
+      border-radius: 14px;
+      border: none;
+      background: linear-gradient(135deg, #0B1E3B 0%, #0F3D5E 50%, #065F46 100%);
+      color: var(--gold-bright);
+      font-size: 14.5px;
+      font-weight: 800;
+      cursor: pointer;
+      margin-top: 14px;
+      box-shadow: 0 8px 20px rgba(11, 30, 59, 0.25);
+    }
+
+    .btn-primary.edit-mode {
+      background: linear-gradient(135deg, #B45309 0%, #D97706 100%);
+      color: #FFFFFF;
+    }
+
+    .wa-gate-card {
+      background: linear-gradient(135deg, #0B1E3B 0%, #064E3B 100%);
+      color: var(--white);
+      border-radius: 20px;
+      padding: 16px;
+      border: 1.5px solid var(--gold);
+      box-shadow: 0 10px 25px rgba(6, 78, 59, 0.2);
+    }
+
+    .wa-gate-info {
+      font-size: 12.5px;
+      color: #E2E8F0;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .btn-wa {
+      width: 100%;
+      padding: 14px;
+      border-radius: 14px;
+      border: none;
+      font-size: 14.5px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-wa.locked {
+      background: rgba(255, 255, 255, 0.12);
+      color: #94A3B8;
+      cursor: not-allowed;
+    }
+
+    .btn-wa.unlocked {
+      background: linear-gradient(135deg, #25D366, #10B981);
+      color: #052E16;
+      box-shadow: 0 6px 18px rgba(37, 211, 102, 0.4);
+    }
+
+    .loader-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(11, 30, 59, 0.88);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      z-index: 1500;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .spinner {
+      width: 36px;
+      height: 36px;
+      border: 3.5px solid rgba(252, 211, 77, 0.25);
+      border-top-color: var(--gold-bright);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 10px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #0B1E3B, #065F46);
+      color: var(--gold-bright);
+      border: 1px solid var(--gold-bright);
+      padding: 11px 18px;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 700;
+      z-index: 2500;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LAYAR KUNCI PIN (0000) -->
+  <div id="lockScreen" class="lock-screen">
+    <div class="logo-trilogy-bar lock-logos">
+      <div class="logo-item">
+        <img src="https://drive.google.com/thumbnail?id=1erjNngfDxUenNx5-cZ9_A4Wa1Pi8opYT&sz=w600" alt="Pondok Pesantren Ar-Rohman Tegalrejo">
+      </div>
+      <div class="logo-divider"></div>
+      <div class="logo-item">
+        <img src="https://drive.google.com/thumbnail?id=1WLFTf2kO2it7wHKfe2ycOIlV1hyLWRq8&sz=w600" alt="Pengasuhan Santri">
+      </div>
+      <div class="logo-divider"></div>
+      <div class="logo-item">
+        <img src="https://drive.google.com/thumbnail?id=13L_3algwKL1xAdZX0EYmmAjeHCBX6wFF&sz=w600" alt="Madrasah Diniyyah">
+      </div>
+    </div>
+
+    <svg class="lock-illustration" viewBox="0 0 160 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="80" cy="65" r="54" fill="url(#glowGrad)" opacity="0.35"/>
+      <path d="M46 105C46 84 60 74 80 74C100 74 114 84 114 105H46Z" fill="#F8FAFC"/>
+      <path d="M80 74V105" stroke="#CBD5E1" stroke-width="2"/>
+      <rect x="48" y="102" width="64" height="14" rx="4" fill="#059669"/>
+      <rect x="74" y="62" width="12" height="14" rx="5" fill="#FDBA74"/>
+      <circle cx="80" cy="48" r="19" fill="#FED7AA"/>
+      <path d="M71 49C72.5 51 75.5 51 77 49" stroke="#1E293B" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M83 49C84.5 51 87.5 51 89 49" stroke="#1E293B" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M76 57C78.5 59 81.5 59 84 57" stroke="#9A3412" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M58 46C58 29 67 22 80 22C93 22 102 29 102 46C102 58 96 68 80 68C64 68 58 58 58 46Z" fill="#0F172A" opacity="0.18"/>
+      <path d="M60 44C60 29 68 23 80 23C92 23 100 29 100 44" stroke="#F8FAFC" stroke-width="4" stroke-linecap="round"/>
+      <path d="M22 108L34 94H126L138 108H22Z" fill="#B45309"/>
+      <rect x="22" y="108" width="116" height="8" rx="3" fill="#78350F"/>
+      <rect x="32" y="116" width="10" height="18" rx="2" fill="#92400E"/>
+      <rect x="118" y="116" width="10" height="18" rx="2" fill="#92400E"/>
+      <path d="M52 96C62 91 74 93 80 98C86 93 98 91 108 96L104 82C95 78 85 80 80 85C75 80 65 78 56 82L52 96Z" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2"/>
+      <path d="M80 85V98" stroke="#D97706" stroke-width="2"/>
+      <circle cx="56" cy="94" r="5" fill="#FED7AA"/>
+      <circle cx="104" cy="94" r="5" fill="#FED7AA"/>
+      <defs>
+        <radialGradient id="glowGrad" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(80 65) rotate(90) scale(54)">
+          <stop stop-color="#FCD34D"/>
+          <stop offset="1" stop-color="#FCD34D" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+    </svg>
+
+    <div class="lock-title">Gerbang Pengawas Ujian Putri</div>
+    <div class="lock-subtitle">Masukkan Sandi 4 Digit untuk Masuk</div>
+
+    <div class="pin-dots" id="pinDots">
+      <div class="pin-dot"></div>
+      <div class="pin-dot"></div>
+      <div class="pin-dot"></div>
+      <div class="pin-dot"></div>
+    </div>
+
+    <div class="numpad-grid">
+      <button type="button" class="num-btn" onclick="pressPin('1')">1</button>
+      <button type="button" class="num-btn" onclick="pressPin('2')">2</button>
+      <button type="button" class="num-btn" onclick="pressPin('3')">3</button>
+      <button type="button" class="num-btn" onclick="pressPin('4')">4</button>
+      <button type="button" class="num-btn" onclick="pressPin('5')">5</button>
+      <button type="button" class="num-btn" onclick="pressPin('6')">6</button>
+      <button type="button" class="num-btn" onclick="pressPin('7')">7</button>
+      <button type="button" class="num-btn" onclick="pressPin('8')">8</button>
+      <button type="button" class="num-btn" onclick="pressPin('9')">9</button>
+      <button type="button" class="num-btn action-btn" onclick="clearPin()">Reset</button>
+      <button type="button" class="num-btn" onclick="pressPin('0')">0</button>
+      <button type="button" class="num-btn action-btn" onclick="backspacePin()">Hapus</button>
+    </div>
+  </div>
+
+  <div id="loader" class="loader-overlay">
+    <div class="spinner"></div>
+    <div id="loaderText">Memuat data ujian...</div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <!-- HEADER UTAMA -->
+  <header class="exam-header">
+    <div class="logo-trilogy-bar header-logos">
+      <div class="logo-item">
+        <img src="https://drive.google.com/thumbnail?id=1erjNngfDxUenNx5-cZ9_A4Wa1Pi8opYT&sz=w600" alt="Pondok Pesantren Ar-Rohman Tegalrejo">
+      </div>
+      <div class="logo-divider"></div>
+      <div class="logo-item">
+        <img src="https://drive.google.com/thumbnail?id=1WLFTf2kO2it7wHKfe2ycOIlV1hyLWRq8&sz=w600" alt="Pengasuhan Santri">
+      </div>
+      <div class="logo-divider"></div>
+      <div class="logo-item">
+        <img src="https://drive.google.com/thumbnail?id=13L_3algwKL1xAdZX0EYmmAjeHCBX6wFF&sz=w600" alt="Madrasah Diniyyah">
+      </div>
+    </div>
+
+    <div class="header-top-bar">
+      <div class="exam-badge">Ujian Awal Sanah &bull; Santri Putri</div>
+      <button type="button" class="btn-lock-app" onclick="lockApp()">Kunci Layar</button>
+    </div>
+
+    <div class="mahfudzot-hero">
+      <svg class="hero-santri-svg" viewBox="0 0 140 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="70" cy="62" r="48" fill="#FCD34D" fill-opacity="0.16"/>
+        <path d="M38 98C38 79 51 70 70 70C89 70 102 79 102 98H38Z" fill="#FFFFFF"/>
+        <rect x="41" y="95" width="58" height="12" rx="3" fill="#10B981"/>
+        <rect x="65" y="58" width="10" height="13" rx="4" fill="#FDBA74"/>
+        <circle cx="70" cy="45" r="17" fill="#FED7AA"/>
+        <path d="M62 46C63.5 48 66 48 67.5 46" stroke="#1E293B" stroke-width="2" stroke-linecap="round"/>
+        <path d="M72.5 46C74 48 76.5 48 78 46" stroke="#1E293B" stroke-width="2" stroke-linecap="round"/>
+        <path d="M52 42C52 28 59 22 70 22C81 22 88 28 88 42" stroke="#F8FAFC" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M16 102L28 89H112L124 102H16Z" fill="#D97706"/>
+        <rect x="16" y="102" width="108" height="7" rx="3" fill="#92400E"/>
+        <rect x="26" y="109" width="9" height="15" rx="2" fill="#78350F"/>
+        <rect x="105" y="109" width="9" height="15" rx="2" fill="#78350F"/>
+        <path d="M44 91C53 86 64 88 70 93C76 88 87 86 96 91L92 78C84 74 75 76 70 81C65 76 56 74 48 78L44 91Z" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2"/>
+        <path d="M70 81V93" stroke="#D97706" stroke-width="1.8"/>
+      </svg>
+
+      <div class="hero-quote-wrap">
+        <div class="arabic-quote">بِالْاِمْتِحَانِ يُكْرَمُ الْمَرْءُ أَوْ يُهَانُ</div>
+        <div class="quote-meaning">"Dengan ujian, seseorang akan dimuliakan atau dihinakan."</div>
+      </div>
+    </div>
+
+    <div class="header-title-row">
+      <div>
+        <h1>Absensi Ruang Ujian Putri</h1>
+        <div class="header-sub">Madrasah Diniyah Ar Rohman Tegalrejo</div>
+      </div>
+      <div class="header-actions">
+        <button type="button" class="btn-add-santri-top" onclick="toggleAddSantriPanel()">+ Santri</button>
+        <button type="button" class="btn-refresh" onclick="loadData(false)">Sinkron</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- PANEL TAMBAH SANTRI SUSULAN -->
+    <section id="addSantriPanel" class="add-santri-panel">
+      <div class="section-label" style="color: #92400E;">
+        <span>Tambah Data Santri Putri Susulan</span>
+        <button type="button" onclick="toggleAddSantriPanel()" style="background:none; border:none; font-weight:800; color:#92400E; cursor:pointer;">Tutup &times;</button>
+      </div>
+      <div class="form-group">
+        <label>Nama Lengkap Santri Putri</label>
+        <input type="text" id="newSantriNama" placeholder="Ketik nama santri putri yang susulan...">
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px;">
+        <div>
+          <label style="font-size:12px; font-weight:700; display:block; margin-bottom:4px;">Kelas</label>
+          <select id="newSantriKelas">
+            <option value="I'dad">I'dad</option>
+            <option value="1 Wustho">1 Wustho</option>
+            <option value="2 Wustho">2 Wustho</option>
+            <option value="3 Wustho">3 Wustho</option>
+            <option value="4 Wustho">4 Wustho</option>
+            <option value="1 Ulya">1 Ulya</option>
+            <option value="2 Ulya">2 Ulya</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size:12px; font-weight:700; display:block; margin-bottom:4px;">Ruang Ujian</label>
+          <select id="newSantriRuang">
+            <option value="Ruang 1">Ruang 1</option>
+            <option value="Ruang 2">Ruang 2</option>
+            <option value="Ruang 3">Ruang 3</option>
+            <option value="Ruang 4">Ruang 4</option>
+            <option value="Ruang 5">Ruang 5</option>
+          </select>
+        </div>
+      </div>
+      <button type="button" class="btn-primary" style="margin-top:4px;" onclick="simpanSantriBaru()">Simpan Santri ke Database</button>
+    </section>
+
+    <!-- 1. PILIH HARI UJIAN -->
+    <section class="card">
+      <div class="section-label">
+        <span>1. Pilih Hari Ujian</span>
+        <span style="font-size:10px; font-weight:700; color:#0F766E; text-transform:none;">1 Laporan / Hari</span>
+      </div>
+      <select id="selectJadwal" onchange="onJadwalChange()"></select>
+      <div id="sessionBanner" class="session-banner"></div>
+      <div id="mapelGrid" class="mapel-grid"></div>
+    </section>
+
+    <!-- 2. PANTAUAN STATUS & EDIT 5 RUANG -->
+    <section class="card">
+      <div class="section-label">
+        <span>2. Status &amp; Edit Laporan Ruang</span>
+        <div style="display:flex; align-items:center; gap:6px;">
+          <span class="live-sync-pill" id="liveSyncBadge"><span class="live-dot"></span>Live 15d</span>
+          <span id="progressCounter" style="color: var(--success);">0/5 Ruang</span>
+        </div>
+      </div>
+      <div class="room-grid" id="roomMonitorGrid"></div>
+    </section>
+
+    <!-- 3. FORM INPUT / EDIT ABSENSI PER RUANG -->
+    <section class="card">
+      <div class="section-label">
+        <span id="formSectionTitle">3. Input Absensi Pengawas</span>
+      </div>
+      
+      <div class="room-tabs">
+        <button type="button" class="room-tab-btn active" onclick="selectRuang('Ruang 1')">Ruang 1</button>
+        <button type="button" class="room-tab-btn" onclick="selectRuang('Ruang 2')">Ruang 2</button>
+        <button type="button" class="room-tab-btn" onclick="selectRuang('Ruang 3')">Ruang 3</button>
+        <button type="button" class="room-tab-btn" onclick="selectRuang('Ruang 4')">Ruang 4</button>
+        <button type="button" class="room-tab-btn" onclick="selectRuang('Ruang 5')">Ruang 5</button>
+      </div>
+
+      <div id="editModeBanner" class="edit-mode-banner">
+        Mode Edit Laporan: Data sebelumnya untuk ruang ini sudah dimuat. Silakan ubah lalu klik Perbarui Laporan.
+      </div>
+
+      <div class="form-group">
+        <label>Nama Ustadzah Pengawas (<span id="labelRuangAktif">Ruang 1</span>)</label>
+        <select id="selectPengawas" onchange="onPengawasChange()">
+          <option value="">-- Pilih Ustadzah Pengawas --</option>
+        </select>
+        <div id="customPengawasWrap" style="display: none; margin-top: 8px;">
+          <input type="text" id="inputCustomPengawas" oninput="markFormDirty()" placeholder="Ketik nama lengkap ustadzah (contoh: Usth Fulanah)...">
+        </div>
+      </div>
+
+      <div class="stats-bar">
+        <div class="stat-box">
+          <div class="num" id="statTotal">0</div>
+          <div class="lbl">Peserta Putri</div>
+        </div>
+        <div class="stat-box hadir">
+          <div class="num" id="statHadir">0</div>
+          <div class="lbl">Hadir</div>
+        </div>
+        <div class="stat-box absen">
+          <div class="num" id="statTidakHadir">0</div>
+          <div class="lbl">Tidak Hadir</div>
+        </div>
+      </div>
+
+      <!-- KETERANGAN JALANNYA UJIAN -->
+      <div class="kondisi-box">
+        <div class="form-group" style="margin-bottom: 0;">
+          <label style="color: #0369A1;">Keterangan Jalannya Ujian (<span id="labelRuangKondisi">Ruang 1</span>)</label>
+          <select id="selectKondisiUjian" onchange="onKondisiChange()">
+            <option value="Tertib & Lancar">Tertib &amp; Lancar</option>
+            <option value="Soal Kurang / Salah Cetak">Soal Kurang / Salah Cetak</option>
+            <option value="Ada Santri Gaduh / Menyontek">Ada Santri Gaduh / Menyontek</option>
+            <option value="Waktu Molor">Waktu Molor</option>
+            <option value="Lainnya">Lainnya (Ketik Sendiri)</option>
+          </select>
+        </div>
+        <div id="customKondisiWrap" style="display: none; margin-top: 8px;">
+          <input type="text" id="inputCustomKondisi" oninput="markFormDirty()" placeholder="Ketik kondisi jalannya ujian sesuka pengawas...">
+        </div>
+      </div>
+
+      <!-- INPUT SANTRI TIDAK HADIR -->
+      <div class="absent-adder">
+        <div class="form-group">
+          <label>Santri Putri yang Tidak Hadir (Kosongkan jika hadir semua)</label>
+          <select id="selectSantri"></select>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1.4fr; gap: 8px; margin-bottom: 10px;">
+          <div>
+            <label style="font-size:11.5px; font-weight:700; display:block; margin-bottom:4px;">Keterangan</label>
+            <select id="selectAlasan">
+              <option value="Sakit">Sakit</option>
+              <option value="Izin">Izin</option>
+              <option value="Alfa">Alfa</option>
+              <option value="Boyong">Boyong</option>
+              <option value="Lainnya">Lainnya</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:11.5px; font-weight:700; display:block; margin-bottom:4px;">Catatan (Opsional)</label>
+            <input type="text" id="inputCatatan" placeholder="Keterangan tambahan...">
+          </div>
+        </div>
+        <button type="button" class="btn-add-absent" onclick="tambahTidakHadir()">+ Tandai Tidak Hadir</button>
+      </div>
+
+      <div id="absentListContainer"></div>
+
+      <button type="button" id="btnSubmitAbsensi" class="btn-primary" onclick="simpanAbsensi()">
+        Simpan Laporan Ruang 1
+      </button>
+    </section>
+
+    <!-- 4. KUNCI & KIRIM REKAP WHATSAPP -->
+    <section class="wa-gate-card">
+      <div class="section-label" style="color: var(--gold-bright);">4. Rekapitulasi WhatsApp (Putri)</div>
+      <div id="waGateStatusText" class="wa-gate-info">
+        Menunggu seluruh 5 ruang menyelesaikan input absensi santri putri hari ini.
+      </div>
+      <button type="button" id="btnKirimWA" class="btn-wa locked" disabled onclick="kirimRekapWA()">
+        Rekap WA Terkunci (Belum 5 Ruang)
+      </button>
+    </section>
+  </main>
+
+  <script>
+    const API_URL = 'https://script.google.com/macros/s/AKfycbyw8mko6u75eO41GFUIkvQm1x_jd-b5lVi3varV13K-SVQ-6TwVr3-2qhD_tfxyd5d6/exec';
+
+    const APP_PIN = '0000';
+    let enteredPin = '';
+
+    const DAFTAR_RUANG = ['Ruang 1', 'Ruang 2', 'Ruang 3', 'Ruang 4', 'Ruang 5'];
+    const URUTAN_KELAS = ["I'dad", '1 Wustho', '2 Wustho', '3 Wustho', '4 Wustho', '1 Ulya', '2 Ulya'];
+    const OPSI_KONDISI_STANDAR = [
+      'Tertib & Lancar',
+      'Soal Kurang / Salah Cetak',
+      'Ada Santri Gaduh / Menyontek',
+      'Waktu Molor'
+    ];
+
+    let appData = { santri: [], jadwal: [], pengawas: [], logs: [] };
+    let currentJadwalId = '';
+    let currentRuang = 'Ruang 1';
+    let currentAbsentList = [];
+
+    let autoRefreshTimer = null;
+    let isSyncing = false;
+    let isFormDirty = false;
+
+    window.onload = function() {
+      if (sessionStorage.getItem('ujian_putri_unlocked') === '1') {
+        document.getElementById('lockScreen').classList.add('unlocked');
+        loadData(false);
+        startAutoRefresh();
+      }
+    };
+
+    document.addEventListener('visibilitychange', function() {
+      if (document.hidden) {
+        stopAutoRefresh();
+      } else if (sessionStorage.getItem('ujian_putri_unlocked') === '1') {
+        loadData(true);
+        startAutoRefresh();
+      }
+    });
+
+    function startAutoRefresh() {
+      stopAutoRefresh();
+      autoRefreshTimer = setInterval(function() {
+        if (!document.hidden && sessionStorage.getItem('ujian_putri_unlocked') === '1') {
+          loadData(true);
+        }
+      }, 15000);
+    }
+
+    function stopAutoRefresh() {
+      if (autoRefreshTimer) {
+        clearInterval(autoRefreshTimer);
+        autoRefreshTimer = null;
+      }
+    }
+
+    function markFormDirty() {
+      isFormDirty = true;
+    }
+
+    /* ================= LOGIKA PILIH USTADZAH + LAINNYA ================= */
+    function onPengawasChange() {
+      markFormDirty();
+      const val = document.getElementById('selectPengawas').value;
+      const customWrap = document.getElementById('customPengawasWrap');
+      const customInput = document.getElementById('inputCustomPengawas');
+
+      if (val === 'Lainnya') {
+        customWrap.style.display = 'block';
+        customInput.focus();
+      } else {
+        customWrap.style.display = 'none';
+      }
+    }
+
+    function getPengawasValue() {
+      const selVal = document.getElementById('selectPengawas').value;
+      if (selVal === 'Lainnya') {
+        return document.getElementById('inputCustomPengawas').value.trim();
+      }
+      return selVal.trim();
+    }
+
+    function setPengawasUI(namaStr) {
+      const val = (namaStr || '').trim();
+      const sel = document.getElementById('selectPengawas');
+      const customWrap = document.getElementById('customPengawasWrap');
+      const customInput = document.getElementById('inputCustomPengawas');
+
+      if (!val) {
+        sel.value = '';
+        customWrap.style.display = 'none';
+        customInput.value = '';
+        return;
+      }
+
+      const exists = Array.from(sel.options).some(function(o) { return o.value === val && val !== 'Lainnya'; });
+      if (exists) {
+        sel.value = val;
+        customWrap.style.display = 'none';
+        customInput.value = '';
+      } else {
+        sel.value = 'Lainnya';
+        customWrap.style.display = 'block';
+        customInput.value = val;
+      }
+    }
+
+    /* ================= LOGIKA KONDISI JALANNYA UJIAN ================= */
+    function onKondisiChange() {
+      markFormDirty();
+      const val = document.getElementById('selectKondisiUjian').value;
+      const customWrap = document.getElementById('customKondisiWrap');
+      const customInput = document.getElementById('inputCustomKondisi');
+
+      if (val === 'Lainnya') {
+        customWrap.style.display = 'block';
+        customInput.focus();
+      } else {
+        customWrap.style.display = 'none';
+      }
+    }
+
+    function getKondisiUjianValue() {
+      const selVal = document.getElementById('selectKondisiUjian').value;
+      if (selVal === 'Lainnya') {
+        const customText = document.getElementById('inputCustomKondisi').value.trim();
+        return customText || 'Lainnya';
+      }
+      return selVal;
+    }
+
+    function setKondisiUjianUI(kondisiStr) {
+      const val = (kondisiStr || 'Tertib & Lancar').trim();
+      const sel = document.getElementById('selectKondisiUjian');
+      const customWrap = document.getElementById('customKondisiWrap');
+      const customInput = document.getElementById('inputCustomKondisi');
+
+      if (OPSI_KONDISI_STANDAR.indexOf(val) !== -1) {
+        sel.value = val;
+        customWrap.style.display = 'none';
+        customInput.value = '';
+      } else {
+        sel.value = 'Lainnya';
+        customWrap.style.display = 'block';
+        customInput.value = val === 'Lainnya' ? '' : val;
+      }
+    }
+
+    /* ================= LOGIKA PIN 0000 ================= */
+    function updatePinDots(isError) {
+      const dots = document.querySelectorAll('#pinDots .pin-dot');
+      dots.forEach(function(dot, idx) {
+        dot.classList.remove('error');
+        dot.classList.toggle('filled', idx < enteredPin.length);
+        if (isError) dot.classList.add('error');
+      });
+    }
+
+    function pressPin(digit) {
+      if (enteredPin.length >= 4) return;
+      enteredPin += digit;
+      updatePinDots(false);
+
+      if (enteredPin.length === 4) {
+        if (enteredPin === APP_PIN) {
+          sessionStorage.setItem('ujian_putri_unlocked', '1');
+          setTimeout(function() {
+            document.getElementById('lockScreen').classList.add('unlocked');
+            loadData(false);
+            startAutoRefresh();
+          }, 150);
+        } else {
+          updatePinDots(true);
+          showToast('Sandi salah! Coba lagi.');
+          setTimeout(function() {
+            enteredPin = '';
+            updatePinDots(false);
+          }, 450);
+        }
+      }
+    }
+
+    function backspacePin() {
+      enteredPin = enteredPin.slice(0, -1);
+      updatePinDots(false);
+    }
+
+    function clearPin() {
+      enteredPin = '';
+      updatePinDots(false);
+    }
+
+    function lockApp() {
+      stopAutoRefresh();
+      sessionStorage.removeItem('ujian_putri_unlocked');
+      enteredPin = '';
+      updatePinDots(false);
+      document.getElementById('lockScreen').classList.remove('unlocked');
+    }
+
+    /* ================= HELPER API FETCH (GITHUB -> APPS SCRIPT) ================= */
+    async function callBackendPost(action, payloadObj) {
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ action: action, payload: payloadObj })
+      });
+      const data = await res.json();
+      if (data && data.error) throw new Error(data.error);
+      return data;
+    }
+
+    /* ================= TAMBAH SANTRI SUSULAN ================= */
+    function toggleAddSantriPanel() {
+      const panel = document.getElementById('addSantriPanel');
+      panel.classList.toggle('open');
+      if (panel.classList.contains('open')) {
+        document.getElementById('newSantriRuang').value = currentRuang;
+        document.getElementById('newSantriNama').focus();
+      }
+    }
+
+    async function simpanSantriBaru() {
+      const nama = document.getElementById('newSantriNama').value.trim();
+      const kelas = document.getElementById('newSantriKelas').value;
+      const ruang = document.getElementById('newSantriRuang').value;
+
+      if (!nama) {
+        showToast('Nama santri tidak boleh kosong!');
+        return;
+      }
+
+      showLoader('Menambahkan santri ke ' + ruang + '...');
+      try {
+        const data = await callBackendPost('addSantriBaru', { nama: nama, kelas: kelas, ruang: ruang });
+        appData = data;
+        document.getElementById('newSantriNama').value = '';
+        document.getElementById('addSantriPanel').classList.remove('open');
+        selectRuang(ruang);
+        showToast('Santri ' + nama + ' ditambahkan ke ' + ruang);
+      } catch (err) {
+        alert('Gagal menambah santri: ' + err.message);
+      } finally {
+        hideLoader();
+      }
+    }
+
+    /* ================= LOGIKA DATA UJIAN ================= */
+    function showLoader(msg) {
+      document.getElementById('loaderText').innerText = msg || 'Memproses...';
+      document.getElementById('loader').style.display = 'flex';
+    }
+
+    function hideLoader() {
+      document.getElementById('loader').style.display = 'none';
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.innerText = msg;
+      t.style.display = 'block';
+      setTimeout(function() { t.style.display = 'none'; }, 3000);
+    }
+
+    async function loadData(isSilent) {
+      if (isSyncing) return;
+      isSyncing = true;
+
+      if (!isSilent) {
+        showLoader('Menyinkronkan data ujian putri...');
+      }
+
+      try {
+        const res = await fetch(API_URL + '?t=' + Date.now());
+        const data = await res.json();
+        if (data && data.error) throw new Error(data.error);
+
+        appData = data;
+        populateJadwal();
+        populatePengawasDropdown();
+
+        if (!currentJadwalId && appData.jadwal.length > 0) {
+          currentJadwalId = appData.jadwal[0].id;
+        }
+        document.getElementById('selectJadwal').value = currentJadwalId;
+
+        if (isSilent) {
+          renderRoomMonitor();
+          updateWAGate();
+
+          if (!isFormDirty) {
+            syncActiveRoomFromServer();
+          } else {
+            populateSantriDropdown();
+            updateStats();
+          }
+        } else {
+          isFormDirty = false;
+          onJadwalChange();
+        }
+      } catch (err) {
+        if (!isSilent) {
+          alert('Gagal memuat data dari server: ' + err.message);
+        }
+      } finally {
+        isSyncing = false;
+        if (!isSilent) hideLoader();
+      }
+    }
+
+    function syncActiveRoomFromServer() {
+      const existingLog = appData.logs.find(function(l) { return l.idJadwal === currentJadwalId && l.ruang === currentRuang; });
+      const editBanner = document.getElementById('editModeBanner');
+      const submitBtn = document.getElementById('btnSubmitAbsensi');
+      const sectionTitle = document.getElementById('formSectionTitle');
+
+      if (existingLog) {
+        setPengawasUI(existingLog.pengawas);
+        setKondisiUjianUI(existingLog.kondisiUjian);
+        currentAbsentList = JSON.parse(JSON.stringify(existingLog.detailTidakHadir || []));
+        editBanner.classList.add('visible');
+        submitBtn.classList.add('edit-mode');
+        submitBtn.innerText = 'Perbarui / Edit Laporan ' + currentRuang;
+        sectionTitle.innerText = '3. Edit Laporan (' + currentRuang + ')';
+      } else {
+        setPengawasUI('');
+        setKondisiUjianUI('Tertib & Lancar');
+        currentAbsentList = [];
+        editBanner.classList.remove('visible');
+        submitBtn.classList.remove('edit-mode');
+        submitBtn.innerText = 'Simpan Laporan ' + currentRuang;
+        sectionTitle.innerText = '3. Input Absensi Pengawas';
+      }
+
+      populateSantriDropdown();
+      renderAbsentList();
+    }
+
+    function populateJadwal() {
+      const sel = document.getElementById('selectJadwal');
+      const prevVal = sel.value || currentJadwalId;
+      sel.innerHTML = '';
+      appData.jadwal.forEach(function(j) {
+        const opt = document.createElement('option');
+        opt.value = j.id;
+        opt.textContent = j.hariTanggal;
+        sel.appendChild(opt);
+      });
+      if (prevVal) sel.value = prevVal;
+    }
+
+    function populatePengawasDropdown() {
+      const sel = document.getElementById('selectPengawas');
+      const prevVal = sel.value;
+      sel.innerHTML = '<option value="">-- Pilih Ustadzah Pengawas --</option>';
+      appData.pengawas.forEach(function(nama) {
+        const opt = document.createElement('option');
+        opt.value = nama;
+        opt.textContent = nama;
+        sel.appendChild(opt);
+      });
+      const optLain = document.createElement('option');
+      optLain.value = 'Lainnya';
+      optLain.textContent = 'Lainnya (Ketik Nama Ustadzah Baru)';
+      sel.appendChild(optLain);
+
+      if (prevVal) sel.value = prevVal;
+    }
+
+    function onJadwalChange() {
+      isFormDirty = false;
+      currentJadwalId = document.getElementById('selectJadwal').value;
+      const j = appData.jadwal.find(function(item) { return item.id === currentJadwalId; });
+      const sessionBanner = document.getElementById('sessionBanner');
+      const grid = document.getElementById('mapelGrid');
+      sessionBanner.innerHTML = '';
+      grid.innerHTML = '';
+
+      if (j) {
+        sessionBanner.innerHTML =
+          '<div class="session-pill">Sesi 1: 19.45 - 20.30 WIB</div>' +
+          '<div class="session-pill">Sesi 2: 20.45 - 21.30 WIB</div>';
+
+        if (j.mapelPerKelas) {
+          URUTAN_KELAS.forEach(function(kls) {
+            const rawMapel = j.mapelPerKelas[kls] || '-';
+            const chip = document.createElement('div');
+            chip.className = 'mapel-chip';
+
+            if (rawMapel.indexOf('&') !== -1) {
+              const parts = rawMapel.split('&');
+              const m1 = (parts[0] || '-').trim();
+              const m2 = (parts.slice(1).join('&') || '-').trim();
+              chip.innerHTML =
+                '<strong>' + kls + '</strong>' +
+                '<div class="mapel-sesi-row">' +
+                  '<span><span class="sesi-tag">S1 (19.45):</span> ' + m1 + '</span>' +
+                  '<span><span class="sesi-tag">S2 (20.45):</span> ' + m2 + '</span>' +
+                '</div>';
+            } else {
+              chip.innerHTML =
+                '<strong>' + kls + '</strong>' +
+                '<div class="mapel-sesi-row">' +
+                  '<span><span class="sesi-tag">S1 (19.45):</span> ' + rawMapel + '</span>' +
+                '</div>';
+            }
+            grid.appendChild(chip);
+          });
+        }
+      }
+
+      renderRoomMonitor();
+      selectRuang(currentRuang);
+      updateWAGate();
+    }
+
+    function getPesertaRuang(ruang) {
+      return appData.santri.filter(function(s) { return s.ruang === ruang; });
+    }
+
+    function renderRoomMonitor() {
+      const grid = document.getElementById('roomMonitorGrid');
+      grid.innerHTML = '';
+      let completedCount = 0;
+
+      DAFTAR_RUANG.forEach(function(ruang) {
+        const log = appData.logs.find(function(l) { return l.idJadwal === currentJadwalId && l.ruang === ruang; });
+        const isDone = !!log;
+        if (isDone) completedCount++;
+
+        const card = document.createElement('div');
+        card.className = 'room-status-card' + (isDone ? ' done' : '') + (currentRuang === ruang ? ' active-edit' : '');
+        card.onclick = function() { selectRuang(ruang); };
+
+        card.innerHTML =
+          '<div class="room-top">' +
+            '<span class="room-name">' + ruang + '</span>' +
+            '<span class="badge-status ' + (isDone ? 'badge-done' : 'badge-pending') + '">' +
+              (isDone ? 'Sudah' : 'Belum') +
+            '</span>' +
+          '</div>' +
+          '<div class="room-detail-text">' +
+            (isDone
+              ? '<strong>' + log.pengawas + '</strong><br>Hadir: ' + log.hadir + ' | Absen: ' + log.tidakHadir +
+                '<span class="room-kondisi-mini">&bull; ' + (log.kondisiUjian || 'Tertib & Lancar') + '</span>' +
+                '<span class="edit-hint-tag">Ketuk untuk Edit</span>'
+              : 'Belum ada laporan masuk') +
+          '</div>';
+        grid.appendChild(card);
+      });
+
+      document.getElementById('progressCounter').innerText = completedCount + '/5 Ruang';
+    }
+
+    function selectRuang(ruang) {
+      isFormDirty = false;
+      currentRuang = ruang;
+      document.getElementById('labelRuangAktif').innerText = ruang;
+      document.getElementById('labelRuangKondisi').innerText = ruang;
+
+      document.querySelectorAll('.room-tab-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.innerText === ruang);
+      });
+
+      syncActiveRoomFromServer();
+      renderRoomMonitor();
+    }
+
+    function populateSantriDropdown() {
+      const sel = document.getElementById('selectSantri');
+      const prevVal = sel.value;
+      sel.innerHTML = '<option value="">-- Pilih Nama Santri --</option>';
+      const santriRuang = getPesertaRuang(currentRuang);
+
+      santriRuang.forEach(function(s) {
+        const alreadyAdded = currentAbsentList.some(function(a) { return a.noPeserta === s.noPeserta; });
+        if (!alreadyAdded) {
+          const opt = document.createElement('option');
+          opt.value = s.noPeserta;
+          opt.textContent = s.nama + ' (' + s.kelas + ')';
+          sel.appendChild(opt);
+        }
+      });
+
+      if (prevVal) sel.value = prevVal;
+      updateStats();
+    }
+
+    function updateStats() {
+      const total = getPesertaRuang(currentRuang).length;
+      const tidakHadir = currentAbsentList.length;
+      const hadir = Math.max(0, total - tidakHadir);
+
+      document.getElementById('statTotal').innerText = total;
+      document.getElementById('statHadir').innerText = hadir;
+      document.getElementById('statTidakHadir').innerText = tidakHadir;
+    }
+
+    function tambahTidakHadir() {
+      const noPeserta = document.getElementById('selectSantri').value;
+      const alasan = document.getElementById('selectAlasan').value;
+      const catatan = document.getElementById('inputCatatan').value.trim();
+
+      if (!noPeserta) {
+        showToast('Pilih nama santri terlebih dahulu');
+        return;
+      }
+
+      const santriObj = appData.santri.find(function(s) { return s.noPeserta === noPeserta; });
+      if (!santriObj) return;
+
+      isFormDirty = true;
+      currentAbsentList.push({
+        noPeserta: santriObj.noPeserta,
+        nama: santriObj.nama,
+        kelas: santriObj.kelas,
+        alasan: alasan,
+        catatan: catatan
+      });
+
+      document.getElementById('inputCatatan').value = '';
+      populateSantriDropdown();
+      renderAbsentList();
+    }
+
+    function hapusTidakHadir(index) {
+      isFormDirty = true;
+      currentAbsentList.splice(index, 1);
+      populateSantriDropdown();
+      renderAbsentList();
+    }
+
+    function renderAbsentList() {
+      const container = document.getElementById('absentListContainer');
+      updateStats();
+
+      if (currentAbsentList.length === 0) {
+        container.innerHTML = '<div class="empty-nihil">Nihil (Seluruh santri putri di ' + currentRuang + ' hadir lengkap)</div>';
+        return;
+      }
+
+      container.innerHTML = '<div class="absent-list">' + currentAbsentList.map(function(item, idx) {
+        return '<div class="absent-item">' +
+          '<div class="absent-info">' +
+            '<strong>' + item.nama + ' (' + item.kelas + ')</strong>' +
+            '<span>' + item.alasan + (item.catatan ? ' - ' + item.catatan : '') + '</span>' +
+          '</div>' +
+          '<button type="button" class="btn-remove" onclick="hapusTidakHadir(' + idx + ')">Hapus</button>' +
+        '</div>';
+      }).join('') + '</div>';
+    }
+
+    async function simpanAbsensi() {
+      const pengawas = getPengawasValue();
+      if (!pengawas) {
+        showToast('Pilih atau ketik Nama Ustadzah Pengawas terlebih dahulu!');
+        if (document.getElementById('selectPengawas').value === 'Lainnya') {
+          document.getElementById('inputCustomPengawas').focus();
+        }
+        return;
+      }
+
+      const selKondisi = document.getElementById('selectKondisiUjian').value;
+      if (selKondisi === 'Lainnya' && !document.getElementById('inputCustomKondisi').value.trim()) {
+        showToast('Ketik keterangan jalannya ujian terlebih dahulu!');
+        document.getElementById('inputCustomKondisi').focus();
+        return;
+      }
+
+      const totalPeserta = getPesertaRuang(currentRuang).length;
+      const kondisiUjian = getKondisiUjianValue();
+      const payloadObj = {
+        idJadwal: currentJadwalId,
+        ruang: currentRuang,
+        pengawas: pengawas,
+        totalPeserta: totalPeserta,
+        detailTidakHadir: currentAbsentList,
+        kondisiUjian: kondisiUjian
+      };
+
+      showLoader('Menyimpan laporan ' + currentRuang + '...');
+      try {
+        const data = await callBackendPost('saveAbsensiRuang', payloadObj);
+        appData = data;
+        isFormDirty = false;
+        populatePengawasDropdown();
+        selectRuang(currentRuang);
+        updateWAGate();
+        showToast('Laporan ' + currentRuang + ' berhasil disimpan');
+      } catch (err) {
+        alert('Gagal menyimpan: ' + err.message);
+      } finally {
+        hideLoader();
+      }
+    }
+
+    function updateWAGate() {
+      const btn = document.getElementById('btnKirimWA');
+      const info = document.getElementById('waGateStatusText');
+
+      const missingRooms = DAFTAR_RUANG.filter(function(r) {
+        return !appData.logs.some(function(l) { return l.idJadwal === currentJadwalId && l.ruang === r; });
+      });
+
+      if (missingRooms.length === 0) {
+        btn.disabled = false;
+        btn.className = 'btn-wa unlocked';
+        btn.innerHTML = 'Kirim Rekap Ujian Putri ke WhatsApp';
+        info.innerHTML = '<span style="color:#34D399; font-weight:700;">Seluruh 5 ruang putri telah lengkap!</span> Rekap siap dikirim ke grup/panitia.';
+      } else {
+        btn.disabled = true;
+        btn.className = 'btn-wa locked';
+        btn.innerHTML = 'Terkunci (' + (5 - missingRooms.length) + '/5 Ruang Masuk)';
+        info.innerHTML = 'Rekap WA belum dapat dikirim. Menunggu laporan dari: <strong style="color:#FBBF24;">' + missingRooms.join(', ') + '</strong>.';
+      }
+    }
+
+    function kirimRekapWA() {
+      const j = appData.jadwal.find(function(item) { return item.id === currentJadwalId; });
+      if (!j) return;
+
+      let totalSemua = 0;
+      let totalHadir = 0;
+      let totalAbsen = 0;
+      let rincianRuangText = '';
+      let daftarAbsenText = '';
+
+      DAFTAR_RUANG.forEach(function(ruang) {
+        const log = appData.logs.find(function(l) { return l.idJadwal === currentJadwalId && l.ruang === ruang; });
+        if (log) {
+          totalSemua += log.totalPeserta;
+          totalHadir += log.hadir;
+          totalAbsen += log.tidakHadir;
+
+          const kondisi = log.kondisiUjian || 'Tertib & Lancar';
+          rincianRuangText += '- *' + ruang + '* (' + log.pengawas + '): Hadir ' + log.hadir + '/' + log.totalPeserta + ' — _' + kondisi + '_\n';
+
+          if (log.detailTidakHadir && log.detailTidakHadir.length > 0) {
+            log.detailTidakHadir.forEach(function(s) {
+              const cat = s.catatan ? ' _(' + s.catatan + ')_' : '';
+              daftarAbsenText += '- ' + s.nama + ' [' + s.kelas + ' - ' + ruang + ']: *' + s.alasan + '*' + cat + '\n';
+            });
+          }
+        }
+      });
+
+      if (!daftarAbsenText) {
+        daftarAbsenText = '_Nihil (Seluruh santri putri hadir lengkap)_\n';
+      }
+
+      const pesan =
+        '*LAPORAN KEHADIRAN UJIAN AWAL SANAH (SANTRI PUTRI)*\n' +
+        '*Madrasah Diniyah Ar Rohman Tegalrejo*\n' +
+        '_بِالْاِمْتِحَانِ يُكْرَمُ الْمَرْءُ أَوْ يُهَانُ_\n\n' +
+        '*Kategori Peserta:* Santri Putri\n' +
+        '*Hari/Tgl:* ' + j.hariTanggal + '\n' +
+        '*Waktu:* Sesi 1 (19.45 - 20.30 WIB) & Sesi 2 (20.45 - 21.30 WIB)\n\n' +
+        '*RINGKASAN KESELURUHAN (PUTRI):*\n' +
+        '- Total Peserta Putri: ' + totalSemua + '\n' +
+        '- Hadir: ' + totalHadir + '\n' +
+        '- Tidak Hadir: ' + totalAbsen + '\n\n' +
+        '*PENGAWAS & KONDISI PER RUANG:*\n' +
+        rincianRuangText + '\n' +
+        '*DAFTAR SANTRI PUTRI TIDAK HADIR:*\n' +
+        daftarAbsenText + '\n' +
+        '_Dikirim melalui Sistem Absensi Ujian Putri_';
+
+      const url = 'https://wa.me/?text=' + encodeURIComponent(pesan);
+      window.open(url, '_blank');
+    }
+  </script>
+</body>
+</html>
