@@ -2,7 +2,10 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0B1E3B">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Absensi Ujian Putri - Madin Ar Rohman Tegalrejo</title>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
@@ -29,6 +32,10 @@
       padding: 0;
       font-family: 'Plus Jakarta Sans', sans-serif;
       -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      background-color: #0B1E3B;
     }
 
     body {
@@ -95,7 +102,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: calc(20px + env(safe-area-inset-top)) 20px calc(20px + env(safe-area-inset-bottom));
       color: var(--white);
       transition: opacity 0.35s ease, visibility 0.35s ease;
       overflow-y: auto;
@@ -204,7 +211,7 @@
     .exam-header {
       background: linear-gradient(135deg, #0B1E3B 0%, #0F3D5E 52%, #065F46 100%);
       color: var(--white);
-      padding: 18px 18px 26px;
+      padding: calc(18px + env(safe-area-inset-top)) 18px 26px;
       border-bottom-left-radius: 28px;
       border-bottom-right-radius: 28px;
       box-shadow: 0 12px 28px rgba(6, 78, 59, 0.22);
