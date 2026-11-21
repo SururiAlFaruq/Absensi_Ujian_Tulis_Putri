@@ -778,6 +778,30 @@
       color: #FFFFFF;
     }
 
+    .btn-delete-report {
+      display: none;
+      width: 100%;
+      padding: 12px;
+      border-radius: 13px;
+      border: 1.5px solid #FDA4AF;
+      background: #FFF1F2;
+      color: #BE123C;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: all 0.15s;
+    }
+
+    .btn-delete-report.visible {
+      display: block;
+    }
+
+    .btn-delete-report:active {
+      background: #FFE4E6;
+      transform: scale(0.99);
+    }
+
     .wa-gate-card {
       background: linear-gradient(135deg, #0B1E3B 0%, #064E3B 100%);
       color: var(--white);
@@ -1077,7 +1101,7 @@
       </div>
 
       <div id="editModeBanner" class="edit-mode-banner">
-        Mode Edit Laporan: Data sebelumnya untuk ruang ini sudah dimuat. Silakan ubah lalu klik Perbarui Laporan.
+        Mode Edit Laporan: Data sebelumnya untuk ruang ini sudah dimuat. Silakan ubah lalu klik Perbarui Laporan, atau batalkan jika salah hari.
       </div>
 
       <div class="form-group">
@@ -1151,6 +1175,10 @@
 
       <button type="button" id="btnSubmitAbsensi" class="btn-primary" onclick="simpanAbsensi()">
         Simpan Laporan Ruang 1
+      </button>
+
+      <button type="button" id="btnDeleteAbsensi" class="btn-delete-report" onclick="hapusAbsensiRuang()">
+        Batalkan / Hapus Laporan Ruang 1
       </button>
     </section>
 
@@ -1482,6 +1510,7 @@
       const existingLog = appData.logs.find(function(l) { return l.idJadwal === currentJadwalId && l.ruang === currentRuang; });
       const editBanner = document.getElementById('editModeBanner');
       const submitBtn = document.getElementById('btnSubmitAbsensi');
+      const deleteBtn = document.getElementById('btnDeleteAbsensi');
       const sectionTitle = document.getElementById('formSectionTitle');
 
       if (existingLog) {
@@ -1491,6 +1520,8 @@
         editBanner.classList.add('visible');
         submitBtn.classList.add('edit-mode');
         submitBtn.innerText = 'Perbarui / Edit Laporan ' + currentRuang;
+        deleteBtn.classList.add('visible');
+        deleteBtn.innerText = 'Batalkan / Hapus Laporan ' + currentRuang;
         sectionTitle.innerText = '3. Edit Laporan (' + currentRuang + ')';
       } else {
         setPengawasUI('');
@@ -1499,6 +1530,7 @@
         editBanner.classList.remove('visible');
         submitBtn.classList.remove('edit-mode');
         submitBtn.innerText = 'Simpan Laporan ' + currentRuang;
+        deleteBtn.classList.remove('visible');
         sectionTitle.innerText = '3. Input Absensi Pengawas';
       }
 
@@ -1613,7 +1645,7 @@
             (isDone
               ? '<strong>' + log.pengawas + '</strong><br>Hadir: ' + log.hadir + ' | Absen: ' + log.tidakHadir +
                 '<span class="room-kondisi-mini">&bull; ' + (log.kondisiUjian || 'Tertib & Lancar') + '</span>' +
-                '<span class="edit-hint-tag">Ketuk untuk Edit</span>'
+                '<span class="edit-hint-tag">Ketuk untuk Edit / Hapus</span>'
               : 'Belum ada laporan masuk') +
           '</div>';
         grid.appendChild(card);
@@ -1759,6 +1791,32 @@
         showToast('Laporan ' + currentRuang + ' berhasil disimpan');
       } catch (err) {
         alert('Gagal menyimpan: ' + err.message);
+      } finally {
+        hideLoader();
+      }
+    }
+
+    async function hapusAbsensiRuang() {
+      const j = appData.jadwal.find(function(item) { return item.id === currentJadwalId; });
+      const labelHari = j ? j.hariTanggal : currentJadwalId;
+
+      if (!confirm('Yakin ingin membatalkan & menghapus laporan ' + currentRuang + ' untuk hari ' + labelHari + '?')) {
+        return;
+      }
+
+      showLoader('Membatalkan laporan ' + currentRuang + '...');
+      try {
+        const data = await callBackendPost('deleteAbsensiRuang', {
+          idJadwal: currentJadwalId,
+          ruang: currentRuang
+        });
+        appData = data;
+        isFormDirty = false;
+        selectRuang(currentRuang);
+        updateWAGate();
+        showToast('Laporan ' + currentRuang + ' telah dibatalkan');
+      } catch (err) {
+        alert('Gagal membatalkan laporan: ' + err.message);
       } finally {
         hideLoader();
       }
