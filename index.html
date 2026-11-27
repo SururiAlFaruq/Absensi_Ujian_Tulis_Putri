@@ -61,8 +61,8 @@
     .logo-trilogy-bar.lock-logos {
       width: 100%;
       max-width: 340px;
-      margin-bottom: 14px;
-      padding: 8px 12px;
+      margin-bottom: 12px;
+      padding: 7px 12px;
     }
 
     .logo-trilogy-bar.header-logos {
@@ -74,11 +74,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 44px;
+      height: 40px;
     }
 
     .logo-item img {
-      max-height: 42px;
+      max-height: 38px;
       max-width: 100%;
       width: auto;
       object-fit: contain;
@@ -87,7 +87,7 @@
 
     .logo-divider {
       width: 1px;
-      height: 30px;
+      height: 28px;
       background: #CBD5E1;
       flex-shrink: 0;
     }
@@ -102,7 +102,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: calc(20px + env(safe-area-inset-top)) 20px calc(20px + env(safe-area-inset-bottom));
+      padding: calc(16px + env(safe-area-inset-top)) 20px calc(16px + env(safe-area-inset-bottom));
       color: var(--white);
       transition: opacity 0.35s ease, visibility 0.35s ease;
       overflow-y: auto;
@@ -115,14 +115,14 @@
     }
 
     .lock-illustration {
-      width: 105px;
-      height: 92px;
-      margin-bottom: 8px;
+      width: 86px;
+      height: 76px;
+      margin-bottom: 6px;
       filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.35));
     }
 
     .lock-title {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 800;
       color: var(--gold-bright);
       letter-spacing: -0.3px;
@@ -130,22 +130,67 @@
     }
 
     .lock-subtitle {
-      font-size: 12px;
+      font-size: 11.5px;
       color: #CBD5E1;
-      margin-top: 3px;
-      margin-bottom: 16px;
+      margin-top: 2px;
+      margin-bottom: 12px;
       text-align: center;
+    }
+
+    .lock-identity-box {
+      width: 100%;
+      max-width: 310px;
+      margin-bottom: 14px;
+    }
+
+    .lock-identity-box label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold-soft);
+      margin-bottom: 5px;
+      text-align: left;
+    }
+
+    .lock-select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1.5px solid rgba(252, 211, 77, 0.65);
+      background: rgba(15, 23, 42, 0.85);
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 700;
+      outline: none;
+    }
+
+    .lock-select option {
+      background: #0B1E3B;
+      color: #FFFFFF;
+    }
+
+    .lock-custom-input {
+      width: 100%;
+      margin-top: 7px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1.5px solid var(--gold-bright);
+      background: rgba(255, 255, 255, 0.95);
+      color: #0F172A;
+      font-size: 13px;
+      font-weight: 700;
+      outline: none;
     }
 
     .pin-dots {
       display: flex;
       gap: 14px;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     .pin-dot {
-      width: 14px;
-      height: 14px;
+      width: 13px;
+      height: 13px;
       border-radius: 50%;
       border: 2px solid var(--gold-bright);
       background: transparent;
@@ -172,20 +217,20 @@
 
     .numpad-grid {
       display: grid;
-      grid-template-columns: repeat(3, 66px);
-      gap: 12px;
+      grid-template-columns: repeat(3, 62px);
+      gap: 10px;
       justify-content: center;
     }
 
     .num-btn {
-      width: 66px;
-      height: 66px;
+      width: 62px;
+      height: 62px;
       border-radius: 50%;
       border: 1.5px solid rgba(252, 211, 77, 0.3);
       background: rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(8px);
       color: var(--white);
-      font-size: 22px;
+      font-size: 21px;
       font-weight: 700;
       cursor: pointer;
       display: flex;
@@ -200,7 +245,7 @@
     }
 
     .num-btn.action-btn {
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 700;
       color: var(--gold-bright);
       border-color: transparent;
@@ -222,7 +267,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      gap: 8px;
+      margin-bottom: 8px;
     }
 
     .exam-badge {
@@ -234,21 +280,43 @@
       color: var(--gold-soft);
       font-size: 10.5px;
       font-weight: 700;
-      letter-spacing: 0.6px;
+      letter-spacing: 0.5px;
       text-transform: uppercase;
-      padding: 5px 12px;
+      padding: 5px 11px;
       border-radius: 99px;
     }
 
     .btn-lock-app {
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: var(--gold-soft);
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(252, 211, 77, 0.45);
+      color: var(--gold-bright);
       padding: 5px 10px;
       border-radius: 99px;
       font-size: 11px;
       font-weight: 700;
       cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .active-user-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(6, 78, 59, 0.55);
+      border: 1px solid rgba(110, 231, 183, 0.4);
+      border-radius: 12px;
+      padding: 7px 12px;
+      margin-bottom: 12px;
+      font-size: 11.5px;
+    }
+
+    .active-user-bar span {
+      color: #D1FAE5;
+    }
+
+    .active-user-bar strong {
+      color: var(--gold-bright);
+      font-weight: 800;
     }
 
     .mahfudzot-hero {
@@ -429,6 +497,14 @@
       box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
     }
 
+    select:disabled, input[type="text"]:disabled {
+      background-color: #F1F5F9;
+      color: #475569;
+      border-color: #E2E8F0;
+      cursor: not-allowed;
+      opacity: 0.9;
+    }
+
     .add-santri-panel {
       display: none;
       background: linear-gradient(145deg, #FFFBEB, #FEF3C7);
@@ -572,13 +648,21 @@
       color: #0F3D5E;
     }
 
+    .room-meta-time {
+      display: block;
+      margin-top: 4px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #047857;
+    }
+
     .edit-hint-tag {
       display: inline-block;
       margin-top: 5px;
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 800;
-      color: #047857;
-      background: rgba(255, 255, 255, 0.75);
+      color: #065F46;
+      background: rgba(255, 255, 255, 0.85);
       padding: 2px 8px;
       border-radius: 6px;
       border: 1px solid #6EE7B7;
@@ -610,16 +694,35 @@
       box-shadow: 0 4px 10px rgba(11, 30, 59, 0.2);
     }
 
+    /* BANNER MODE TERKUNCI & MODE EDIT */
+    .locked-report-banner {
+      display: none;
+      background: linear-gradient(135deg, #ECFDF5, #D1FAE5);
+      border: 1.5px solid #10B981;
+      color: #065F46;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 10px 12px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      line-height: 1.45;
+    }
+
+    .locked-report-banner.visible {
+      display: block;
+    }
+
     .edit-mode-banner {
       display: none;
       background: #FEF3C7;
-      border: 1px solid #F59E0B;
+      border: 1.5px solid #F59E0B;
       color: #92400E;
       font-size: 12px;
       font-weight: 700;
-      padding: 8px 12px;
-      border-radius: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
       margin-bottom: 12px;
+      line-height: 1.45;
     }
 
     .edit-mode-banner.visible {
@@ -672,6 +775,10 @@
       border-radius: 15px;
       padding: 12px;
       margin-top: 10px;
+    }
+
+    .absent-adder.hidden-locked {
+      display: none;
     }
 
     .kondisi-box {
@@ -778,6 +885,43 @@
       color: #FFFFFF;
     }
 
+    .btn-unlock-edit {
+      display: none;
+      width: 100%;
+      padding: 14px;
+      border-radius: 14px;
+      border: 2px solid #F59E0B;
+      background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
+      color: #92400E;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      margin-top: 14px;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.18);
+    }
+
+    .btn-unlock-edit.visible {
+      display: block;
+    }
+
+    .btn-cancel-edit {
+      display: none;
+      width: 100%;
+      padding: 11px;
+      border-radius: 12px;
+      border: 1.5px solid #CBD5E1;
+      background: #F8FAFC;
+      color: #475569;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    .btn-cancel-edit.visible {
+      display: block;
+    }
+
     .btn-delete-report {
       display: none;
       width: 100%;
@@ -802,6 +946,85 @@
       transform: scale(0.99);
     }
 
+    /* ================= RIWAYAT AKTIVITAS ================= */
+    .btn-toggle-audit {
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      color: #1D4ED8;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 99px;
+      cursor: pointer;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    .audit-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 260px;
+      overflow-y: auto;
+    }
+
+    .audit-item {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-left: 3.5px solid #0F766E;
+      border-radius: 10px;
+      padding: 9px 11px;
+      font-size: 11.5px;
+      line-height: 1.4;
+    }
+
+    .audit-item.aksi-edit {
+      border-left-color: #F59E0B;
+      background: #FFFBEB;
+    }
+
+    .audit-item.aksi-hapus {
+      border-left-color: #E11D48;
+      background: #FFF1F2;
+    }
+
+    .audit-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3px;
+      gap: 6px;
+    }
+
+    .audit-badge {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 6px;
+      background: #D1FAE5;
+      color: #065F46;
+    }
+
+    .audit-item.aksi-edit .audit-badge {
+      background: #FEF3C7;
+      color: #92400E;
+    }
+
+    .audit-item.aksi-hapus .audit-badge {
+      background: #FFE4E6;
+      color: #9F1239;
+    }
+
+    .audit-time {
+      font-size: 10px;
+      color: #64748B;
+      font-weight: 600;
+    }
+
+    .audit-desc {
+      color: #1E293B;
+    }
+
     .wa-gate-card {
       background: linear-gradient(135deg, #0B1E3B 0%, #064E3B 100%);
       color: var(--white);
@@ -809,6 +1032,7 @@
       padding: 16px;
       border: 1.5px solid var(--gold);
       box-shadow: 0 10px 25px rgba(6, 78, 59, 0.2);
+      margin-bottom: 14px;
     }
 
     .wa-gate-info {
@@ -886,12 +1110,14 @@
       z-index: 2500;
       box-shadow: 0 8px 20px rgba(0,0,0,0.3);
       display: none;
+      max-width: 90vw;
+      text-align: center;
     }
   </style>
 </head>
 <body>
 
-  <!-- LAYAR KUNCI PIN (0000) -->
+  <!-- LAYAR KUNCI IDENTITAS & PIN (0000) -->
   <div id="lockScreen" class="lock-screen">
     <div class="logo-trilogy-bar lock-logos">
       <div class="logo-item">
@@ -936,7 +1162,18 @@
     </svg>
 
     <div class="lock-title">Gerbang Pengawas Ujian Putri</div>
-    <div class="lock-subtitle">Masukkan Sandi 4 Digit untuk Masuk</div>
+    <div class="lock-subtitle">Pilih Nama Ustadzah &amp; Masukkan Sandi 4 Digit</div>
+
+    <!-- PILIHAN NAMA USTADZAH DI LAYAR KUNCI -->
+    <div class="lock-identity-box">
+      <label for="lockSelectPengawas">Nama Ustadzah yang Bertugas / Login:</label>
+      <select id="lockSelectPengawas" class="lock-select" onchange="onLockPengawasChange()">
+        <option value="">-- Pilih Nama Ustadzah --</option>
+      </select>
+      <div id="lockCustomPengawasWrap" style="display:none;">
+        <input type="text" id="lockInputCustomPengawas" class="lock-custom-input" placeholder="Ketik nama lengkap ustadzah...">
+      </div>
+    </div>
 
     <div class="pin-dots" id="pinDots">
       <div class="pin-dot"></div>
@@ -986,7 +1223,13 @@
 
     <div class="header-top-bar">
       <div class="exam-badge">Ujian Awal Sanah &bull; Santri Putri</div>
-      <button type="button" class="btn-lock-app" onclick="lockApp()">Kunci Layar</button>
+      <button type="button" class="btn-lock-app" onclick="lockApp()">Ganti Akun / Kunci</button>
+    </div>
+
+    <!-- BAR IDENTITAS USTADZAH AKTIF -->
+    <div class="active-user-bar">
+      <span>Pengawas Login: <strong id="activeUserDisplay">-</strong></span>
+      <span style="font-size:10.5px; color:#A7F3D0;">Tercatat di Log</span>
     </div>
 
     <div class="mahfudzot-hero">
@@ -1077,7 +1320,7 @@
     <!-- 2. PANTAUAN STATUS & EDIT 5 RUANG -->
     <section class="card">
       <div class="section-label">
-        <span>2. Status &amp; Edit Laporan Ruang</span>
+        <span>2. Status &amp; Pantauan 5 Ruang</span>
         <div style="display:flex; align-items:center; gap:6px;">
           <span class="live-sync-pill" id="liveSyncBadge"><span class="live-dot"></span>Live 15d</span>
           <span id="progressCounter" style="color: var(--success);">0/5 Ruang</span>
@@ -1100,8 +1343,12 @@
         <button type="button" class="room-tab-btn" onclick="selectRuang('Ruang 5')">Ruang 5</button>
       </div>
 
+      <!-- BANNER MODE TERKUNCI (READ-ONLY) -->
+      <div id="lockedReportBanner" class="locked-report-banner"></div>
+
+      <!-- BANNER MODE EDIT AKTIF -->
       <div id="editModeBanner" class="edit-mode-banner">
-        Mode Edit Laporan: Data sebelumnya untuk ruang ini sudah dimuat. Silakan ubah lalu klik Perbarui Laporan, atau batalkan jika salah hari.
+        Mode Edit Aktif: Silakan ubah data laporan ruang ini lalu klik <strong>Perbarui Laporan</strong>.
       </div>
 
       <div class="form-group">
@@ -1147,7 +1394,7 @@
       </div>
 
       <!-- INPUT SANTRI TIDAK HADIR -->
-      <div class="absent-adder">
+      <div id="absentAdderBox" class="absent-adder">
         <div class="form-group">
           <label>Santri Putri yang Tidak Hadir (Kosongkan jika hadir semua)</label>
           <select id="selectSantri"></select>
@@ -1173,10 +1420,22 @@
 
       <div id="absentListContainer"></div>
 
+      <!-- TOMBOL BUKA MODE EDIT (SAAT LAPORAN SUDAH TERKUNCI) -->
+      <button type="button" id="btnUnlockEdit" class="btn-unlock-edit" onclick="enableEditMode()">
+        Buka Mode Edit Laporan Ruang 1
+      </button>
+
+      <!-- TOMBOL SIMPAN / PERBARUI -->
       <button type="button" id="btnSubmitAbsensi" class="btn-primary" onclick="simpanAbsensi()">
         Simpan Laporan Ruang 1
       </button>
 
+      <!-- TOMBOL BATAL EDIT -->
+      <button type="button" id="btnCancelEdit" class="btn-cancel-edit" onclick="cancelEditMode()">
+        Batal Edit (Kunci Kembali)
+      </button>
+
+      <!-- TOMBOL HAPUS LAPORAN -->
       <button type="button" id="btnDeleteAbsensi" class="btn-delete-report" onclick="hapusAbsensiRuang()">
         Batalkan / Hapus Laporan Ruang 1
       </button>
@@ -1192,6 +1451,17 @@
         Rekap WA Terkunci (Belum 5 Ruang)
       </button>
     </section>
+
+    <!-- 5. LOG RIWAYAT AKTIVITAS PENGAWAS -->
+    <section class="card">
+      <div class="section-label">
+        <span>5. Log Aktivitas Pengawas</span>
+        <button type="button" id="btnToggleAudit" class="btn-toggle-audit" onclick="toggleAuditList()">Sembunyikan</button>
+      </div>
+      <div id="auditLogContainer" class="audit-list">
+        <div style="font-size:12px; color:#64748B; text-align:center; padding:10px;">Memuat riwayat aktivitas...</div>
+      </div>
+    </section>
   </main>
 
   <script>
@@ -1199,6 +1469,18 @@
 
     const APP_PIN = '0000';
     let enteredPin = '';
+    let activeUserName = '';
+
+    const DEFAULT_PENGAWAS_FALLBACK = [
+      'Usth Amalia Hilda A',
+      'Usth Fina Afifatu R',
+      'Usth Kayla Zhafrina F',
+      'Usth Siti Nur Fatimah',
+      'Usth Afifah Wulandari',
+      'Usth Atsilla Imtiyazul A',
+      'Usth Cahyaning Ayu A',
+      'Usth Diva Aulia Puji A'
+    ];
 
     const DAFTAR_RUANG = ['Ruang 1', 'Ruang 2', 'Ruang 3', 'Ruang 4', 'Ruang 5'];
     const URUTAN_KELAS = ["I'dad", '1 Wustho', '2 Wustho', '3 Wustho', '4 Wustho', '1 Ulya', '2 Ulya'];
@@ -1209,27 +1491,90 @@
       'Waktu Molor'
     ];
 
-    let appData = { santri: [], jadwal: [], pengawas: [], logs: [] };
+    let appData = { santri: [], jadwal: [], pengawas: [], logs: [], activities: [] };
     let currentJadwalId = '';
     let currentRuang = 'Ruang 1';
     let currentAbsentList = [];
 
+    // State penguncian & deteksi anti-timpa
+    let isRoomLocked = false;
+    let isEditUnlocked = false;
+    let loadedLogTimestamp = '';
+
     let autoRefreshTimer = null;
     let isSyncing = false;
     let isFormDirty = false;
+    let isAuditExpanded = true;
 
     window.onload = function() {
-      if (sessionStorage.getItem('ujian_putri_unlocked') === '1') {
+      populateLockPengawasDropdown(DEFAULT_PENGAWAS_FALLBACK);
+      preloadPengawasForLockScreen();
+
+      const savedUser = sessionStorage.getItem('ujian_putri_user') || '';
+      if (sessionStorage.getItem('ujian_putri_unlocked') === '1' && savedUser) {
+        activeUserName = savedUser;
+        document.getElementById('activeUserDisplay').innerText = activeUserName;
         document.getElementById('lockScreen').classList.add('unlocked');
         loadData(false);
         startAutoRefresh();
       }
     };
 
+    async function preloadPengawasForLockScreen() {
+      try {
+        const res = await fetch(API_URL + '?t=' + Date.now());
+        const data = await res.json();
+        if (data && Array.isArray(data.pengawas) && data.pengawas.length > 0) {
+          appData = data;
+          populateLockPengawasDropdown(data.pengawas);
+        }
+      } catch (e) {
+        // Tetap gunakan daftar fallback jika offline/lambat
+      }
+    }
+
+    function populateLockPengawasDropdown(list) {
+      const sel = document.getElementById('lockSelectPengawas');
+      const prevVal = sel.value;
+      sel.innerHTML = '<option value="">-- Pilih Nama Ustadzah --</option>';
+      list.forEach(function(nama) {
+        const opt = document.createElement('option');
+        opt.value = nama;
+        opt.textContent = nama;
+        sel.appendChild(opt);
+      });
+      const optLain = document.createElement('option');
+      optLain.value = 'Lainnya';
+      optLain.textContent = 'Lainnya (Ketik Nama Ustadzah Baru)';
+      sel.appendChild(optLain);
+
+      if (prevVal) sel.value = prevVal;
+    }
+
+    function onLockPengawasChange() {
+      const val = document.getElementById('lockSelectPengawas').value;
+      const customWrap = document.getElementById('lockCustomPengawasWrap');
+      const customInput = document.getElementById('lockInputCustomPengawas');
+      if (val === 'Lainnya') {
+        customWrap.style.display = 'block';
+        customInput.focus();
+      } else {
+        customWrap.style.display = 'none';
+      }
+    }
+
+    function getLockPengawasName() {
+      const selVal = document.getElementById('lockSelectPengawas').value;
+      if (selVal === 'Lainnya') {
+        return document.getElementById('lockInputCustomPengawas').value.trim();
+      }
+      return selVal.trim();
+    }
+
     document.addEventListener('visibilitychange', function() {
       if (document.hidden) {
         stopAutoRefresh();
-      } else if (sessionStorage.getItem('ujian_putri_unlocked') === '1') {
+      } else if (sessionStorage.getItem('ujian_putri_unlocked') === '1' && activeUserName) {
         loadData(true);
         startAutoRefresh();
       }
@@ -1238,7 +1583,7 @@
     function startAutoRefresh() {
       stopAutoRefresh();
       autoRefreshTimer = setInterval(function() {
-        if (!document.hidden && sessionStorage.getItem('ujian_putri_unlocked') === '1') {
+        if (!document.hidden && sessionStorage.getItem('ujian_putri_unlocked') === '1' && activeUserName) {
           loadData(true);
         }
       }, 15000);
@@ -1255,6 +1600,15 @@
       isFormDirty = true;
     }
 
+    function formatShortTime(ts) {
+      if (!ts) return '';
+      const parts = ts.split(' ');
+      if (parts.length > 1) {
+        return parts[1].slice(0, 5) + ' WIB';
+      }
+      return ts;
+    }
+
     /* ================= LOGIKA PILIH USTADZAH + LAINNYA ================= */
     function onPengawasChange() {
       markFormDirty();
@@ -1264,7 +1618,7 @@
 
       if (val === 'Lainnya') {
         customWrap.style.display = 'block';
-        customInput.focus();
+        if (!isRoomLocked) customInput.focus();
       } else {
         customWrap.style.display = 'none';
       }
@@ -1312,7 +1666,7 @@
 
       if (val === 'Lainnya') {
         customWrap.style.display = 'block';
-        customInput.focus();
+        if (!isRoomLocked) customInput.focus();
       } else {
         customWrap.style.display = 'none';
       }
@@ -1344,7 +1698,7 @@
       }
     }
 
-    /* ================= LOGIKA PIN 0000 ================= */
+    /* ================= LOGIKA PIN 0000 + NAMA USTADZAH ================= */
     function updatePinDots(isError) {
       const dots = document.querySelectorAll('#pinDots .pin-dot');
       dots.forEach(function(dot, idx) {
@@ -1360,8 +1714,28 @@
       updatePinDots(false);
 
       if (enteredPin.length === 4) {
+        const chosenName = getLockPengawasName();
+        if (!chosenName) {
+          updatePinDots(true);
+          showToast('Pilih atau ketik Nama Ustadzah terlebih dahulu!');
+          setTimeout(function() {
+            enteredPin = '';
+            updatePinDots(false);
+            if (document.getElementById('lockSelectPengawas').value === 'Lainnya') {
+              document.getElementById('lockInputCustomPengawas').focus();
+            } else {
+              document.getElementById('lockSelectPengawas').focus();
+            }
+          }, 400);
+          return;
+        }
+
         if (enteredPin === APP_PIN) {
+          activeUserName = chosenName;
           sessionStorage.setItem('ujian_putri_unlocked', '1');
+          sessionStorage.setItem('ujian_putri_user', activeUserName);
+          document.getElementById('activeUserDisplay').innerText = activeUserName;
+
           setTimeout(function() {
             document.getElementById('lockScreen').classList.add('unlocked');
             loadData(false);
@@ -1391,7 +1765,11 @@
     function lockApp() {
       stopAutoRefresh();
       sessionStorage.removeItem('ujian_putri_unlocked');
+      sessionStorage.removeItem('ujian_putri_user');
+      activeUserName = '';
       enteredPin = '';
+      isFormDirty = false;
+      isEditUnlocked = false;
       updatePinDots(false);
       document.getElementById('lockScreen').classList.remove('unlocked');
     }
@@ -1430,11 +1808,18 @@
 
       showLoader('Menambahkan santri ke ' + ruang + '...');
       try {
-        const data = await callBackendPost('addSantriBaru', { nama: nama, kelas: kelas, ruang: ruang });
+        const data = await callBackendPost('addSantriBaru', {
+          nama: nama,
+          kelas: kelas,
+          ruang: ruang,
+          idJadwal: currentJadwalId,
+          actor: activeUserName
+        });
         appData = data;
         document.getElementById('newSantriNama').value = '';
         document.getElementById('addSantriPanel').classList.remove('open');
         selectRuang(ruang);
+        renderAuditLog();
         showToast('Santri ' + nama + ' ditambahkan ke ' + ruang);
       } catch (err) {
         alert('Gagal menambah santri: ' + err.message);
@@ -1457,7 +1842,7 @@
       const t = document.getElementById('toast');
       t.innerText = msg;
       t.style.display = 'block';
-      setTimeout(function() { t.style.display = 'none'; }, 3000);
+      setTimeout(function() { t.style.display = 'none'; }, 3200);
     }
 
     async function loadData(isSilent) {
@@ -1476,6 +1861,7 @@
         appData = data;
         populateJadwal();
         populatePengawasDropdown();
+        populateLockPengawasDropdown(appData.pengawas);
 
         if (!currentJadwalId && appData.jadwal.length > 0) {
           currentJadwalId = appData.jadwal[0].id;
@@ -1485,8 +1871,9 @@
         if (isSilent) {
           renderRoomMonitor();
           updateWAGate();
+          renderAuditLog();
 
-          if (!isFormDirty) {
+          if (!isFormDirty && !isEditUnlocked) {
             syncActiveRoomFromServer();
           } else {
             populateSantriDropdown();
@@ -1494,6 +1881,7 @@
           }
         } else {
           isFormDirty = false;
+          isEditUnlocked = false;
           onJadwalChange();
         }
       } catch (err) {
@@ -1506,36 +1894,139 @@
       }
     }
 
-    function syncActiveRoomFromServer() {
-      const existingLog = appData.logs.find(function(l) { return l.idJadwal === currentJadwalId && l.ruang === currentRuang; });
+    /* ================= PENGATURAN MODE BACA / TERKUNCI / EDIT ================= */
+    function applyFormLockState() {
+      const selPengawas = document.getElementById('selectPengawas');
+      const inpCustomPengawas = document.getElementById('inputCustomPengawas');
+      const selKondisi = document.getElementById('selectKondisiUjian');
+      const inpCustomKondisi = document.getElementById('inputCustomKondisi');
+      const absentAdderBox = document.getElementById('absentAdderBox');
+
+      const btnUnlock = document.getElementById('btnUnlockEdit');
+      const btnSubmit = document.getElementById('btnSubmitAbsensi');
+      const btnCancelEdit = document.getElementById('btnCancelEdit');
+      const btnDelete = document.getElementById('btnDeleteAbsensi');
+      const lockedBanner = document.getElementById('lockedReportBanner');
       const editBanner = document.getElementById('editModeBanner');
-      const submitBtn = document.getElementById('btnSubmitAbsensi');
-      const deleteBtn = document.getElementById('btnDeleteAbsensi');
       const sectionTitle = document.getElementById('formSectionTitle');
 
-      if (existingLog) {
-        setPengawasUI(existingLog.pengawas);
-        setKondisiUjianUI(existingLog.kondisiUjian);
-        currentAbsentList = JSON.parse(JSON.stringify(existingLog.detailTidakHadir || []));
-        editBanner.classList.add('visible');
-        submitBtn.classList.add('edit-mode');
-        submitBtn.innerText = 'Perbarui / Edit Laporan ' + currentRuang;
-        deleteBtn.classList.add('visible');
-        deleteBtn.innerText = 'Batalkan / Hapus Laporan ' + currentRuang;
-        sectionTitle.innerText = '3. Edit Laporan (' + currentRuang + ')';
-      } else {
-        setPengawasUI('');
-        setKondisiUjianUI('Tertib & Lancar');
-        currentAbsentList = [];
+      const existingLog = appData.logs.find(function(l) {
+        return l.idJadwal === currentJadwalId && l.ruang === currentRuang;
+      });
+
+      if (existingLog && !isEditUnlocked) {
+        // MODE TERKUNCI (READ-ONLY)
+        isRoomLocked = true;
+        selPengawas.disabled = true;
+        inpCustomPengawas.disabled = true;
+        selKondisi.disabled = true;
+        inpCustomKondisi.disabled = true;
+        absentAdderBox.classList.add('hidden-locked');
+
+        const updater = existingLog.updatedBy || existingLog.pengawas;
+        const jamStr = formatShortTime(existingLog.timestamp);
+        lockedBanner.innerHTML =
+          '<strong>Laporan ' + currentRuang + ' Sudah Masuk &amp; Terkunci</strong><br>' +
+          'Pengawas Ruang: <strong>' + existingLog.pengawas + '</strong><br>' +
+          'Terakhir disimpan oleh <strong>' + updater + '</strong>' + (jamStr ? ' pada <strong>' + jamStr + '</strong>' : '') + '.';
+        lockedBanner.classList.add('visible');
         editBanner.classList.remove('visible');
-        submitBtn.classList.remove('edit-mode');
-        submitBtn.innerText = 'Simpan Laporan ' + currentRuang;
-        deleteBtn.classList.remove('visible');
+
+        btnUnlock.innerText = 'Buka Mode Edit Laporan ' + currentRuang;
+        btnUnlock.classList.add('visible');
+
+        btnSubmit.style.display = 'none';
+        btnCancelEdit.classList.remove('visible');
+
+        btnDelete.innerText = 'Batalkan / Hapus Laporan ' + currentRuang;
+        btnDelete.classList.add('visible');
+
+        sectionTitle.innerText = '3. Detail Laporan (' + currentRuang + ' - Terkunci)';
+      } else if (existingLog && isEditUnlocked) {
+        // MODE EDIT TERBUKA
+        isRoomLocked = false;
+        selPengawas.disabled = false;
+        inpCustomPengawas.disabled = false;
+        selKondisi.disabled = false;
+        inpCustomKondisi.disabled = false;
+        absentAdderBox.classList.remove('hidden-locked');
+
+        lockedBanner.classList.remove('visible');
+        editBanner.classList.add('visible');
+
+        btnUnlock.classList.remove('visible');
+
+        btnSubmit.style.display = 'block';
+        btnSubmit.classList.add('edit-mode');
+        btnSubmit.innerText = 'Perbarui / Simpan Perubahan ' + currentRuang;
+
+        btnCancelEdit.classList.add('visible');
+
+        btnDelete.innerText = 'Batalkan / Hapus Laporan ' + currentRuang;
+        btnDelete.classList.add('visible');
+
+        sectionTitle.innerText = '3. Mode Edit (' + currentRuang + ')';
+      } else {
+        // RUANG BELUM DIISI (INPUT BARU)
+        isRoomLocked = false;
+        selPengawas.disabled = false;
+        inpCustomPengawas.disabled = false;
+        selKondisi.disabled = false;
+        inpCustomKondisi.disabled = false;
+        absentAdderBox.classList.remove('hidden-locked');
+
+        lockedBanner.classList.remove('visible');
+        editBanner.classList.remove('visible');
+
+        btnUnlock.classList.remove('visible');
+
+        btnSubmit.style.display = 'block';
+        btnSubmit.classList.remove('edit-mode');
+        btnSubmit.innerText = 'Simpan Laporan ' + currentRuang;
+
+        btnCancelEdit.classList.remove('visible');
+        btnDelete.classList.remove('visible');
+
         sectionTitle.innerText = '3. Input Absensi Pengawas';
       }
 
-      populateSantriDropdown();
       renderAbsentList();
+    }
+
+    function enableEditMode() {
+      isEditUnlocked = true;
+      isFormDirty = false;
+      applyFormLockState();
+      showToast('Mode edit ' + currentRuang + ' dibuka');
+    }
+
+    function cancelEditMode() {
+      isEditUnlocked = false;
+      isFormDirty = false;
+      syncActiveRoomFromServer();
+      showToast('Edit dibatalkan, laporan dikunci kembali');
+    }
+
+    function syncActiveRoomFromServer() {
+      const existingLog = appData.logs.find(function(l) {
+        return l.idJadwal === currentJadwalId && l.ruang === currentRuang;
+      });
+
+      if (existingLog) {
+        loadedLogTimestamp = existingLog.timestamp || '';
+        setPengawasUI(existingLog.pengawas);
+        setKondisiUjianUI(existingLog.kondisiUjian);
+        currentAbsentList = JSON.parse(JSON.stringify(existingLog.detailTidakHadir || []));
+      } else {
+        loadedLogTimestamp = '';
+        // Otomatis isi dengan nama ustadzah yang login jika ruang masih kosong
+        setPengawasUI(activeUserName);
+        setKondisiUjianUI('Tertib & Lancar');
+        currentAbsentList = [];
+      }
+
+      populateSantriDropdown();
+      applyFormLockState();
     }
 
     function populateJadwal() {
@@ -1571,6 +2062,7 @@
 
     function onJadwalChange() {
       isFormDirty = false;
+      isEditUnlocked = false;
       currentJadwalId = document.getElementById('selectJadwal').value;
       const j = appData.jadwal.find(function(item) { return item.id === currentJadwalId; });
       const sessionBanner = document.getElementById('sessionBanner');
@@ -1614,6 +2106,7 @@
       renderRoomMonitor();
       selectRuang(currentRuang);
       updateWAGate();
+      renderAuditLog();
     }
 
     function getPesertaRuang(ruang) {
@@ -1634,18 +2127,24 @@
         card.className = 'room-status-card' + (isDone ? ' done' : '') + (currentRuang === ruang ? ' active-edit' : '');
         card.onclick = function() { selectRuang(ruang); };
 
+        const jamUpdate = isDone ? formatShortTime(log.timestamp) : '';
+        const updaterInfo = isDone && log.updatedBy && log.updatedBy !== log.pengawas
+          ? ' (Edit: ' + log.updatedBy + ')'
+          : '';
+
         card.innerHTML =
           '<div class="room-top">' +
             '<span class="room-name">' + ruang + '</span>' +
             '<span class="badge-status ' + (isDone ? 'badge-done' : 'badge-pending') + '">' +
-              (isDone ? 'Sudah' : 'Belum') +
+              (isDone ? 'Terkunci' : 'Belum') +
             '</span>' +
           '</div>' +
           '<div class="room-detail-text">' +
             (isDone
               ? '<strong>' + log.pengawas + '</strong><br>Hadir: ' + log.hadir + ' | Absen: ' + log.tidakHadir +
                 '<span class="room-kondisi-mini">&bull; ' + (log.kondisiUjian || 'Tertib & Lancar') + '</span>' +
-                '<span class="edit-hint-tag">Ketuk untuk Edit / Hapus</span>'
+                '<span class="room-meta-time">Update: ' + jamUpdate + updaterInfo + '</span>' +
+                '<span class="edit-hint-tag">Ketuk untuk Lihat / Edit</span>'
               : 'Belum ada laporan masuk') +
           '</div>';
         grid.appendChild(card);
@@ -1656,6 +2155,7 @@
 
     function selectRuang(ruang) {
       isFormDirty = false;
+      isEditUnlocked = false;
       currentRuang = ruang;
       document.getElementById('labelRuangAktif').innerText = ruang;
       document.getElementById('labelRuangKondisi').innerText = ruang;
@@ -1699,6 +2199,7 @@
     }
 
     function tambahTidakHadir() {
+      if (isRoomLocked) return;
       const noPeserta = document.getElementById('selectSantri').value;
       const alasan = document.getElementById('selectAlasan').value;
       const catatan = document.getElementById('inputCatatan').value.trim();
@@ -1726,6 +2227,7 @@
     }
 
     function hapusTidakHadir(index) {
+      if (isRoomLocked) return;
       isFormDirty = true;
       currentAbsentList.splice(index, 1);
       populateSantriDropdown();
@@ -1742,16 +2244,21 @@
       }
 
       container.innerHTML = '<div class="absent-list">' + currentAbsentList.map(function(item, idx) {
+        const removeBtnHtml = isRoomLocked
+          ? ''
+          : '<button type="button" class="btn-remove" onclick="hapusTidakHadir(' + idx + ')">Hapus</button>';
+
         return '<div class="absent-item">' +
           '<div class="absent-info">' +
             '<strong>' + item.nama + ' (' + item.kelas + ')</strong>' +
             '<span>' + item.alasan + (item.catatan ? ' - ' + item.catatan : '') + '</span>' +
           '</div>' +
-          '<button type="button" class="btn-remove" onclick="hapusTidakHadir(' + idx + ')">Hapus</button>' +
+          removeBtnHtml +
         '</div>';
       }).join('') + '</div>';
     }
 
+    /* ================= SIMPAN DENGAN DETEKSI ANTI-TIMPA ================= */
     async function simpanAbsensi() {
       const pengawas = getPengawasValue();
       if (!pengawas) {
@@ -1769,26 +2276,69 @@
         return;
       }
 
-      const totalPeserta = getPesertaRuang(currentRuang).length;
-      const kondisiUjian = getKondisiUjianValue();
-      const payloadObj = {
-        idJadwal: currentJadwalId,
-        ruang: currentRuang,
-        pengawas: pengawas,
-        totalPeserta: totalPeserta,
-        detailTidakHadir: currentAbsentList,
-        kondisiUjian: kondisiUjian
-      };
-
-      showLoader('Menyimpan laporan ' + currentRuang + '...');
+      showLoader('Memeriksa sinkronisasi ' + currentRuang + '...');
       try {
+        // Cek kondisi terbaru di server sebelum menimpa
+        const checkRes = await fetch(API_URL + '?t=' + Date.now());
+        const latestData = await checkRes.json();
+
+        if (latestData && Array.isArray(latestData.logs)) {
+          const serverLog = latestData.logs.find(function(l) {
+            return l.idJadwal === currentJadwalId && l.ruang === currentRuang;
+          });
+
+          // Jika di server sudah ada data baru yang berbeda timestamp dari yang kita buka
+          if (serverLog && serverLog.timestamp !== loadedLogTimestamp) {
+            hideLoader();
+            const pengubah = serverLog.updatedBy || serverLog.pengawas;
+            const jamBaru = formatShortTime(serverLog.timestamp);
+            const setujuTimpa = confirm(
+              'PERINGATAN BENTROK DATA!\n\n' +
+              'Laporan ' + currentRuang + ' baru saja diisi/diperbarui oleh ' + pengubah +
+              (jamBaru ? ' pada pukul ' + jamBaru : '') + '.\n\n' +
+              '• Klik OK untuk MENIMPA data tersebut dengan inputan Anda.\n' +
+              '• Klik BATAL untuk melihat data terbaru dari ' + pengubah + '.'
+            );
+
+            if (!setujuTimpa) {
+              appData = latestData;
+              isFormDirty = false;
+              isEditUnlocked = false;
+              renderRoomMonitor();
+              syncActiveRoomFromServer();
+              updateWAGate();
+              renderAuditLog();
+              showToast('Memuat data terbaru milik ' + pengubah);
+              return;
+            }
+            showLoader('Menyimpan & memperbarui ' + currentRuang + '...');
+          } else {
+            showLoader('Menyimpan laporan ' + currentRuang + '...');
+          }
+        }
+
+        const totalPeserta = getPesertaRuang(currentRuang).length;
+        const kondisiUjian = getKondisiUjianValue();
+        const payloadObj = {
+          idJadwal: currentJadwalId,
+          ruang: currentRuang,
+          pengawas: pengawas,
+          actor: activeUserName || pengawas,
+          totalPeserta: totalPeserta,
+          detailTidakHadir: currentAbsentList,
+          kondisiUjian: kondisiUjian
+        };
+
         const data = await callBackendPost('saveAbsensiRuang', payloadObj);
         appData = data;
         isFormDirty = false;
+        isEditUnlocked = false;
         populatePengawasDropdown();
+        populateLockPengawasDropdown(appData.pengawas);
         selectRuang(currentRuang);
         updateWAGate();
-        showToast('Laporan ' + currentRuang + ' berhasil disimpan');
+        renderAuditLog();
+        showToast('Laporan ' + currentRuang + ' berhasil disimpan & dikunci');
       } catch (err) {
         alert('Gagal menyimpan: ' + err.message);
       } finally {
@@ -1808,18 +2358,63 @@
       try {
         const data = await callBackendPost('deleteAbsensiRuang', {
           idJadwal: currentJadwalId,
-          ruang: currentRuang
+          ruang: currentRuang,
+          actor: activeUserName
         });
         appData = data;
         isFormDirty = false;
+        isEditUnlocked = false;
         selectRuang(currentRuang);
         updateWAGate();
+        renderAuditLog();
         showToast('Laporan ' + currentRuang + ' telah dibatalkan');
       } catch (err) {
         alert('Gagal membatalkan laporan: ' + err.message);
       } finally {
         hideLoader();
       }
+    }
+
+    /* ================= LOG AKTIVITAS PENGAWAS ================= */
+    function toggleAuditList() {
+      isAuditExpanded = !isAuditExpanded;
+      const box = document.getElementById('auditLogContainer');
+      const btn = document.getElementById('btnToggleAudit');
+      box.style.display = isAuditExpanded ? 'flex' : 'none';
+      btn.innerText = isAuditExpanded ? 'Sembunyikan' : 'Tampilkan';
+    }
+
+    function renderAuditLog() {
+      const container = document.getElementById('auditLogContainer');
+      const list = Array.isArray(appData.activities) ? appData.activities : [];
+
+      if (list.length === 0) {
+        container.innerHTML = '<div style="font-size:12px; color:#64748B; text-align:center; padding:10px;">Belum ada catatan aktivitas.</div>';
+        return;
+      }
+
+      container.innerHTML = list.slice(0, 20).map(function(act) {
+        let extraClass = '';
+        if (act.aksi.indexOf('Edit') !== -1) extraClass = ' aksi-edit';
+        else if (act.aksi.indexOf('Hapus') !== -1) extraClass = ' aksi-hapus';
+
+        const jadwalObj = appData.jadwal.find(function(j) { return j.id === act.idJadwal; });
+        const labelJadwal = jadwalObj ? jadwalObj.hariTanggal.split(',')[0] : act.idJadwal;
+        const infoPengawas = act.pengawasRuang && act.pengawasRuang !== '-' && act.pengawasRuang !== act.pelaku
+          ? ' (Pengawas Ruang: ' + act.pengawasRuang + ')'
+          : '';
+
+        return '<div class="audit-item' + extraClass + '">' +
+          '<div class="audit-top">' +
+            '<span class="audit-badge">' + act.aksi + ' &bull; ' + act.ruang + ' (' + labelJadwal + ')</span>' +
+            '<span class="audit-time">' + act.waktu + '</span>' +
+          '</div>' +
+          '<div class="audit-desc">' +
+            '<strong>' + act.pelaku + '</strong>' + infoPengawas + '<br>' +
+            '<span style="color:#475569;">' + act.keterangan + '</span>' +
+          '</div>' +
+        '</div>';
+      }).join('');
     }
 
     function updateWAGate() {
